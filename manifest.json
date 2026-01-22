@@ -1,0 +1,29 @@
+{
+  "manifestVersion": 1,
+  "name": "My PF2E Character Sheet",
+  "summary": "A symbiote that allows the full implementation of a PF2E character in TaleSpire",
+  "entryPoint": "/HTML/character.html",
+  "version": "0.3",
+  "descriptionFilePath": "/readme.md",
+  "license": "MIT",
+  "about": {
+    "authors": ["Jumperfrog07"]
+  },
+  "api": {
+    "version": "0.1",
+    "initTimeout": 10,
+    "subscriptions": {
+      "symbiote": {
+        "onStateChangeEvent": "onStateChangeEvent"
+      }
+    }
+  },
+  "environment": {
+    "webViewBackgroundColor": "#000000",
+    "extras": [
+      "fonts",
+      "icons",
+      "colorStyles"
+    ]
+  }
+}

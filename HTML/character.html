@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character Sheet</title>
+    <link rel="stylesheet" href="../Styles/character.css">
+    <script src="../JS/character.js" defer></script>
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="character.html">Character</a>
+        <a href="spells.html">Spells</a>
+    </div>
+    <br>
+
+    <div class="content-row">
+        <input style="height:20px" id="calculateRolls" type="checkbox" class="field-data-mid">Press to Recalculate</input><p class="field-desc"></p>
+    </div>
+
+    <div class="container">
+        <div class="content-row">
+            <label class="field-title">PC</label><input id="character-name" type="text" class="field-data"><p class="field-desc">Character name</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">Class</label><input id="class" type="text" class="field-data"><p class="field-desc"></p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">Race</label><input id="race" type="text" class="field-data"><p class="field-desc"></p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">BG</label><input id="background" type="text" class="field-data"><p class="field-desc">Background</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">Level</label><input id="level" type="number" class="field-data"><p class="field-desc"></p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">XP</label><input id="xp" type="number" class="field-data"><p class="field-desc"></p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">Class Skill</label>
+            <select id="class-skill" type="select">
+                <option value='str'>STR</option>
+                <option value='int'>INT</option>
+                <option value='wis'>WIS</option>
+                <option value='dex'>DEX</option>
+                <option value='con'>CON</option>
+                <option value='cha'>CHA</option>
+            </select>
+            <label class="field-title">Spell Skill</label>
+            <select id="spell-skill" type="select">
+                <option value='str'>STR</option>
+                <option value='int'>INT</option>
+                <option value='wis'>WIS</option>
+                <option value='dex'>DEX</option>
+                <option value='con'>CON</option>
+                <option value='cha'>CHA</option>
+            </select>
+        </div>
+        <!-- Only one of the two lines is needed. Second line shows a proficiency bonus entry -->
+        <div class="content-row">
+            <label class="field-title" id="Proficiency Bonus"></label>
+            <!-- <label class="field-title">Prof. Bonus</label><input id="Proficiency Bonus" type="number" class="field-data" disabled = "disabled"><p class="field-desc"></p> -->
+        </div>
+        
+    </div>
+    
+    
+    <div class="container columns-2">
+        <div class="container">
+            <h1>Stats</h1>
+            <div class="content-row">
+                <label class="field-title" data-dice-type="1d20" data-modifier="MODIF_STR" data-label="Strength">STR</label><input id="baseStr" type="number" class="field-data-short-mod" min="0">
+                <input id="MODIF_STR" type="number" class="field-data-short-mod" disabled = "disabled" >
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-dice-type="1d20" data-modifier="MODIF_INT" data-label="Intelligence">INT</label><input id="baseInt" type="number" class="field-data-short-mod" min="0">
+                <input id="MODIF_INT" type="number" class="field-data-short-mod" disabled = "disabled" >
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-dice-type="1d20" data-modifier="MODIF_WIS" data-label="Wisdom">WIS</label><input id="baseWis" type="number" class="field-data-short-mod" min="0">
+                <input id="MODIF_WIS" type="number" class="field-data-short-mod" disabled = "disabled" >
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-dice-type="1d20" data-modifier="MODIF_DEX" data-label="Dexterity">DEX</label><input id="baseDex" type="number" class="field-data-short-mod" min="0">
+                <input id="MODIF_DEX" type="number" class="field-data-short-mod" disabled = "disabled" >
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-dice-type="1d20" data-modifier="MODIF_CON" data-label="Constitution">CON</label><input id="baseCon" type="number" class="field-data-short-mod" min="0">
+                <input id="MODIF_CON" type="number" class="field-data-short-mod" disabled = "disabled" >
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-dice-type="1d20" data-modifier="MODIF_CHA" data-label="Charisma">CHA</label><input id="baseCha" type="number" class="field-data-short-mod" min="0"> 
+                <input id="MODIF_CHA" type="number" class="field-data-short-mod" disabled = "disabled" >
+            </div>
+
+            <!-- <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="PerTot" data-label="Perception">PER</label>
+                <input id="PerBon" type="number" class="field-data-short" min="0">
+                <input id="PerTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="per-train" type="select" data-modifier=MODIF_WIS>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div> -->
+
+            <label class="field-desc">Left full Stats, right modifier</label>
+        </div>
+        <div class="container">
+            <h1>Saving Throws</h1>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="SaveFortitude" data-label="Fortitude Save">FOR</label><input id="save-fortitude-bon" type="number" class="field-data-short" min="0">
+                <input id="SaveFortitude" type="number" disabled = "disabled" class="field-data-short-mod"><p class="field-desc">Used when your characters health or vitality is under attack.</p>
+                <select id="fort-train" data-save=true type="select" data-modifier=MODIF_CON>
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="SaveReflex" data-label="Reflex Save">RFX</label><input id="save-reflex-bon" type="number" class="field-data-short" min="0">
+                <input id="SaveReflex" type="number" disabled = "disabled" class="field-data-short-mod"><p class="field-desc">Quickly dodge away from danger.</p>
+                <select id="refl-train" data-save=true type="select" data-modifier=MODIF_DEX>
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="SaveWill" data-label="Will Save">WIL</label><input id="save-will-bon" type="number" class="field-data-short" min="0">
+                <input id="SaveWill" type="number" disabled = "disabled" class="field-data-short-mod"><p class="field-desc">Used as your defense against spells and effects that target the mind. </p>
+                <select id="will-train" data-save=true type="select" data-modifier=MODIF_WIS>
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="abilities-container columns-2">
+        <div class="container">
+            <h1>Abilities</h1>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="AcrTot" data-label="Acrobatics">Acrobatics</label><input id="AcrBon" type="number" class="field-data-short" min="0">
+                <input id="AcrTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="acr-train" type="select" data-modifier=MODIF_DEX>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="ArcTot" data-label="Arcana">Arcana</label><input id="ArcBon" type="number" class="field-data-short" min="0">
+                <input id="ArcTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="arc-train" type="select" data-modifier=MODIF_INT>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="AthTot" data-label="Athletics">Athletics</label><input id="AthBon" type="number" class="field-data-short" min="0">
+                <input id="AthTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="ath-train" type="select" data-modifier=MODIF_STR>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="CraTot" data-label="Crafting">Crafting</label><input id="CraBon" type="number" class="field-data-short" min="0">
+                <input id="CraTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="cra-train" type="select" data-modifier=MODIF_INT>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="DecTot" data-label="Deception">Deception</label><input id="DecBon" type="number" class="field-data-short" min="0">
+                <input id="DecTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="dec-train" type="select" data-modifier=MODIF_CHA>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="DipTot" data-label="Diplomacy">Diplomacy</label><input id="DipBon" type="number" class="field-data-short" min="0">
+                <input id="DipTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="dip-train" type="select" data-modifier=MODIF_CHA>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="IntimTot" data-label="Intimidation">Intimidation</label><input id="IntimBon" type="number" class="field-data-short" min="0">
+                <input id="IntimTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="intim-train" type="select" data-modifier=MODIF_CHA>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="MedTot" data-label="Medicine">Medicine</label><input id="MedBon" type="number" class="field-data-short" min="0">
+                <input id="MedTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="med-train" type="select" data-modifier=MODIF_WIS>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <label class="field-desc">Arrows on left to adjust, right total</label>
+        </div>
+        <div class="container">
+            <h1><br></h1>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="NatTot" data-label="Nature">Nature</label><input id="NatBon" type="number" class="field-data-short" min="0">
+                <input id="NatTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="nat-train" type="select" data-modifier=MODIF_WIS>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="OccTot" data-label="Occultism">Occultism</label><input id="OccBon" type="number" class="field-data-short" min="0">
+                <input id="OccTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="occ-train" type="select" data-modifier=MODIF_INT>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="PerfTot" data-label="Performance">Performance</label><input id="PerfBon" type="number" class="field-data-short" min="0">
+                <input id="PerfTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="perf-train" type="select" data-modifier=MODIF_CHA>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="RelTot" data-label="Religion">Religion</label><input id="RelBon" type="number" class="field-data-short" min="0">
+                <input id="RelTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="rel-train" type="select" data-modifier=MODIF_WIS>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="SocTot" data-label="Society">Society</label><input id="SocBon" type="number" class="field-data-short" min="0">
+                <input id="SocTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="soc-train" type="select" data-modifier=MODIF_INT>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="SteTot" data-label="Stealth">Stealth</label><input id="SteBon" type="number" class="field-data-short" min="0">
+                <input id="SteTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="ste-train" type="select" data-modifier=MODIF_DEX>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="SurTot" data-label="Survival">Survival</label><input id="SurBon" type="number" class="field-data-short" min="0">
+                <input id="SurTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="sur-train" type="select" data-modifier=MODIF_WIS>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="ThiTot" data-label="Thievery">Thievery</label><input id="ThiBon" type="number" class="field-data-short" min="0">
+                <input id="ThiTot" type="number" disabled = "disabled" class="field-data-short-mod">
+                <select id="thi-train" type="select" data-modifier=MODIF_DEX>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+            </div>
+        </div>
+        
+            
+        
+    </div>
+    <div class="container">
+        <h2>Additional Skills and Lores</h2>
+        <p class="field-desc-long">Type in extra skills, lores, etc. here. Format: "Name Modifier Description"</p>
+        <template id="skill-template">
+            <div class="content-row">
+                <label class="field-title" id="skill-template-title" data-prof=true data-dice-type="1d20" data-modifier="skill-template-mod" data-label="skill-template-label" style="width: auto">Skill Title</label><input id="skill-template-bon" type="number" class="field-data-short" min="0">
+                <input id="skill-template-mod" type="number" disabled = "disabled" class="field-data-short-mod">
+                <!-- <button id="skill-template-button" data-dice-types="1d20" data-labels="" onclick="rollDamage(this)"><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Roll Damage</button> -->
+                <select id="skill-template-train" type="select" data-modifier=skill-template-mod>
+                    <option value=0>U</option>
+                    <option value=2>T</option>
+                    <option value=4>E</option>
+                    <option value=6>M</option>
+                    <option value=8>L</option>
+                </select>
+                <p id="skills-template-desc" class="skills-desc">Skill description</p>
+            </div>
+        </template>
+        <div class="content-row">
+            <textarea id="skills-text" area-labelledby="skills-section"></textarea>
+        </div>
+    </div>
+        <!--exhaustion-->
+        <div class="exhaustion-container">
+            <label class="field-title-long">Exhaustion Level</label><input id="exhaustion-mod" type="number" class="field-data-short-big"><input id="exhaustion-mod-neg" type="hidden" disabled = "disabled" class="field-data-short-big">
+        </div>
+
+    <div class="container columns-2">
+        <div class="content-row" style="width: 100%">
+            <h1>Combat</h1>
+        </div>
+        <div class="container">
+            <div class="content-row">
+                <label class="field-title">HP</label><input id="hp" type="number" class="field-data-short-mod"><p class="field-desc">Hit points</p>
+            </div>
+            <div class="content-row">
+                    <label class="field-title">Temp</label><input id="temp-hp" type="number" class="field-data-short-mod"><p class="field-desc">Temp HP</p>
+            </div>
+            <div class="content-row">
+                <label class="field-title-perception">Dying</label><input id="dying" type="number" class="field-data-short-mod"><p class="field-desc"></p>
+            </div>
+            <div class="content-row">
+                    <label class="field-title-perception">Wounded</label><input id="wounded" type="number" class="field-data-short-mod"><p class="field-desc"></p>
+            </div>
+            <h2>Attack Weapons</h2>
+
+            <p class="field-desc">Field for Hitdice, enter in format "Weapon_Name 1d12+3"</p>
+            <div class="container">
+                <template id="Hitdice-template">
+                <div class="content-row">
+                    <label id="Hitdice-template-title" class="Hitdice-title">Action Title</label>
+                    <button id="Hitdice-template-button0" data-dice-types="" data-labels="" ><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 1</button>
+                    <button id="Hitdice-template-button1" data-dice-types="" data-labels="" ><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 2</button>
+                    <button id="Hitdice-template-button2" data-dice-types="" data-labels="" ><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 3</button>
+                    <p id="Hitdice-template-desc" class="Hitdice-desc">Action description</p>
+                </div>
+                </template>
+                <div class="content-row">
+                    <textarea id="Hitdice-text" area-labelledby="Hitdice-section"></textarea>
+                </div>
+            </div>
+            
+        </div>
+        <div class="container">
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-modifier="acTot" data-label="AC">AC</label><input id="acBon" type="number" class="field-data-short" min="0">
+                <input id="acTot" type="number" disabled = "disabled" class="field-data-short-mod"><p class="field-desc">Armor Prof.</p>
+                <select id="ac-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+            
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-modifier="classTot" data-label="classDC">Class DC</label><input id="classBon" type="number" class="field-data-short" min="0">
+                <input id="classTot" type="number" disabled = "disabled" class="field-data-short-mod"><p class="field-desc">Class DC</p>
+                <select id="class-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+                <!-- <label class="field-title-perception"></label><input id="missile-mod" type="number" class="field-data-short-mod" min="0"><p class="field-desc">IGNORE</p>
+                <input id="missile-mod-exhaustion" type="hidden" disabled = "disabled" class="field-data-short-mod">  -->
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-modifier="spellTot" data-label="spellDC">Spell DC</label><input id="spellBon" type="number" class="field-data-short" min="0">
+                <input id="spellTot" type="number" disabled = "disabled" class="field-data-short-mod"><p class="field-desc">Spell DC</p>
+                <select id="spell-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+                <!-- <label class="field-title">Spell</label><input id="spell-mod" type="number" class="field-data-short-mod" min="0"><p class="field-desc">Spell DC</p>
+                <input id="spell-mod-exhaustion" type="hidden" disabled = "disabled" class="field-data-short-mod"> -->
+            </div>
+            <div class="content-row">
+                <label class="field-title-perception"data-label="Encourage">Hero Points</label><input id="heropoint" type="checkbox" class="field-data-short"><p class="field-desc"></p>
+                </label><input id="heropoint" type="checkbox" class="field-data-short"><p class="field-desc"></p>
+                </label><input id="heropoint" type="checkbox" class="field-data-short"><p class="field-desc">Re-roll</p>
+
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="InitTot" data-label="Initiative">Per</label><input id="InitBon" type="number" class="field-data-short" min="0">
+                <input id="InitTot" type="number" disabled = "disabled" class="field-data-short-mod"><p class="field-desc">Perception</p>
+                <select id="init-train" type="select" data-modifier=MODIF_WIS>
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+            <div class="content-row">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="InitTot" data-label="InitiativeRoll"></label>
+                <button id="init-roll" style="cursor: pointer;" onclick=addToInitiative()>Roll for Initiative!</button>
+            </div>
+            <div class="content-row" margin="auto">
+                <label class="field-title-perception" style="text-align: center;">Simple<br> Prof.</label>
+                <select id="simple-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+                <label class="field-title-perception" style="text-align: center;">Martial<br> Prof.</label>
+                <select id="martial-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="container">
+		<h1 id="abilities-section">Abilities, Spells, Weapons</h1>
+<template id="abilities-template">
+  <div class="content-row">
+    <label id="abilities-template-title" class="ability-title">Action Title</label>
+    <button id="abilities-template-button" data-dice-types="" data-labels="" onclick="rollDamage(this)"><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Roll Damage</button>
+    <p id="abilities-template-desc" class="ability-desc">Action description</p>
+  </div>
+</template>
+		<div class="content-row">
+			<textarea id="abilities-text" area-labelledby="abilities-section"></textarea>
+		</div>
+	</div>
+    <div class="container columns-2">
+    <div class="container">
+        <div class="content-row">
+            <h1>Movement</h1>
+        </div>
+        <div class="container">
+            <div class="content-row">
+                <label class="field-title-perception">Travel</label><input id="move-overland" type="number" class="field-data-short-mod" min="0"><p class="field-desc">Overland Travel (miles/day)</p>
+            </div>
+            <div class="content-row">
+                <label class="field-title">Speed</label><input id="move-encounter" type="number" class="field-data-short-mod" min="0" step=5><p class="field-desc">Speed (feet/round)</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content-row">
+            <h1>Money</h1>
+        </div>
+        <div class="container">
+            <div class="content-row">
+                <label class="field-title">Platinum</label>
+            </div>
+            <div>
+                <input id="Platinum" type="number" class="field-data-mid" min="0">
+            </div>
+            <div class="content-row">
+                <label class="field-title">Silver</label>
+            </div>
+            <div>
+                <input id="Silver" type="number" class="field-data-mid" min="0">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content-row">
+            <h1><br></h1>
+        </div>
+        <div class="container">
+            <div class="content-row">
+                <label class="field-title">Gold</label>
+            </div>
+            <div>
+                <input id="Gold" type="number" class="field-data-mid" min="0">
+            </div>
+            <div class="content-row">
+                <label class="field-title">Copper</label>
+            </div>
+            <div>
+                <input id="Copper" type="number" class="field-data-mid" min="0">
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <h1 id="languages-section">Languages</h1>
+        <div class="content-row">
+            <textarea id="languages-text" aria-labelledby="languages-section"></textarea>
+        </div>
+        <div class="content-row" style="gap: 1%">
+            <input id="literate" type="checkbox"><p class="field-desc">Literate</p>
+        </div>
+    </div><div class="container">
+        <h1>Inventory</h1>
+        <div class="content-row">
+            <textarea id="inventory-text"></textarea>
+        </div>
+        <div class="container">
+            <h1>Notes</h1>
+            <div class="content-row">
+                <textarea id="inventory-text"></textarea>
+            </div>
+    </div>
+    <div class="content-row" style="margin-bottom: 0">
+        <span style="flex-grow: 1"></span>
+        <button id="clear-storage" class="" style="margin: 3em 0 0 0" onclick="clearSheet()" disabled="">Character Sheet Empty</button>
+    </div>
+    
+    </body>
+
+</html>
