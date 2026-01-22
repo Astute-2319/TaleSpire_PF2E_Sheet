@@ -57,6 +57,9 @@ function onInputChange(input) {
     calculateRolls();
     let data;
     // get already stored data
+    // See the folder .localStorage to see data format (it's a JSON file)
+    // TODO: Can I make it have multiple "pieces"?
+    // Example: [character={...}, spells={...}, ...]
     TS.localStorage.campaign.getBlob().then((storedData) => {
         // TS.debug.log(storedData)
         //parse stored blob as json, but also handle if it's empty by
@@ -369,17 +372,8 @@ function addSkillLore(results) {
 
         containerNew.insertBefore(newSkill, document.getElementById("skills-text").parentElement);
         
-        // var MODIF_STR = document.getElementById('MODIF_STR').value;
-        // var MODIF_INT = document.getElementById('MODIF_INT').value;
-        // var MODIF_WIS = document.getElementById('MODIF_WIS').value;
-        // var MODIF_DEX = document.getElementById('MODIF_DEX').value;
-        // var MODIF_CON = document.getElementById('MODIF_CON').value;
-        // var MODIF_CHA = document.getElementById('MODIF_CHA').value;
-
         // TS.debug.log("Mod: "+newSelect.dataset.modifier)
 
-        // var class_skills = {'MODIF_STR': MODIF_STR, 'MODIF_INT': MODIF_INT, 'MODIF_WIS': MODIF_WIS, 'MODIF_DEX': MODIF_DEX, 'MODIF_CON': MODIF_CON, 'MODIF_CHA': MODIF_CHA}
-        // var skillMod = class_skills[newSelect.dataset.modifier]
         var skillMod = newSelect.dataset.modifier
         TS.debug.log("New Skill Mod: "+skillMod)
         var skillTrain = document.getElementById(newSelect.id).value;
@@ -387,50 +381,6 @@ function addSkillLore(results) {
         var skillBon = document.getElementById(newInput1.id).value;
         // TS.debug.log("Bonus: "+skillBon);
         document.getElementById(newInput2.id).value = BONCALC (skillMod, skillBon, skillTrain, level, true);
-
-
-        // let clonedSkillNew = templateNew.content.firstElementChild.cloneNode(true);
-        // clonedSkillNew.id = "new-skill-" + i;
-        // // TS.debug.log("ClonedSkillNew ID: "+clonedSkillNew.id);
-        // let titleNew = clonedSkillNew.querySelector("[id=skill-template-title]");
-        // // TS.debug.log("TitleNew: "+titleNew)
-        // titleNew.removeAttribute("id");
-        // titleNew.textContent = results[i]["title"];
-        // // TS.debug.log(titleNew.textContent)
-
-        // let modifierNew = clonedSkillNew.querySelector("[id=skill-template-mod]");
-        // // TS.debug.log("modifierNew: "+modifierNew)
-        // modifierNew.removeAttribute("id");
-        // modifierNew.textContent = results[i]["mod"];
-        // // TS.debug.log(modifierNew.textContent)
-
-        // let descriptionNew = clonedSkillNew.querySelector("[id=skills-template-desc]");
-        // // TS.debug.log("descriptionNew: "+descriptionNew)
-        // descriptionNew.removeAttribute("id");
-        // descriptionNew.textContent = results[i]["description"];
-        // // TS.debug.log(descriptionNew.textContent)
-
-        // // TS.debug.log(clonedSkillNew.class)
-
-
-
-        // let newText = skillText + i.toString();
-        // TS.debug.log("New Text: " + newText) // *skill-template-title0
-        // let titleNew2 = clonedSkillNew.querySelector("[id="+newText+"]");
-        // TS.debug.log("Title New 2: " + titleNew2)
-        // titleNew2.id = "skill-title-new" + i.toString();
-        // TS.debug.log("Title New 2 ID: " + titleNew2.id)
-
-        // TS.dice.putDiceInTray([createDiceRoll(buttonNew, null)]);
-
-        // let button = clonedAction.querySelector("[id=skill-template-button]");
-        // button.id = "skill-button" + i;
-        // button.dataset.diceType = results[i]["dice"];
-        // button.dataset.label = results[i]["title"];
-        // button.addEventListener("click", function() {
-        //     TS.dice.putDiceInTray([createDiceRoll(button, null)]);
-        //     //we are not checking for success or failure here, but could easily by adding a .then (success) and .catch (failure)
-        // });
     }
 }
 
