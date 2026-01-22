@@ -1,5 +1,12 @@
 This character sheet is based on the generic character sheet provided by BouncyRock, and is intended to be used for PF2E characters.
 
+# How to install
+
+0. Ensure Symbiotes are enabled in your TaleSpire game client
+1. Download all files here as a ZIP
+2. Unzip contents into the Symbiotes folder of your TaleSpire AppData location. Example path: `C:\Users\USER\AppData\LocalLow\BouncyRock Entertainment\TaleSpire\Symbiotes\My PF2E Character Sheet`
+3. Launch TaleSpire, and you should find the Symbiote available in the client.
+
 # Features
 
 Currently implemented
