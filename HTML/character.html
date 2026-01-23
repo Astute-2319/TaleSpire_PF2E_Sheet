@@ -340,7 +340,6 @@
             <div class="content-row">
                 <label class="field-title" id="skill-template-title" data-prof=true data-dice-type="1d20" data-modifier="skill-template-mod" data-label="skill-template-label" style="width: auto">Skill Title</label><input id="skill-template-bon" type="number" class="field-data-short" min="0">
                 <input id="skill-template-mod" type="number" disabled = "disabled" class="field-data-short-mod">
-                <!-- <button id="skill-template-button" data-dice-types="1d20" data-labels="" onclick="rollDamage(this)"><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Roll Damage</button> -->
                 <select id="skill-template-train" type="select" data-modifier=skill-template-mod>
                     <option value=0>U</option>
                     <option value=2>T</option>
@@ -473,6 +472,61 @@
                     <option value=6>Master</option>
                     <option value=8>Legendary</option>
                 </select>
+            </div>
+
+            <div class="content-row">
+                <label class="field-title-perception" style="text-align: center;">Conditions</label>
+                <select id="conditions">
+                    <option value="blinded">Blinded</option>
+                    <option value="clumsy">Clumsy</option>
+                    <option value="concealed">Concealed</option>
+                    <option value="confused">Confused</option>
+                    <option value="controlled">Controlled</option>
+                    <option value="dazzled">Dazzled</option>
+                    <option value="deafened">Deafened</option>
+                    <option value="doomed">Doomed</option>
+                    <option value="drained">Drained</option>
+                    <option value="dying">Dying</option>
+                    <option value="encumbered">Encumbered</option>
+                    <option value="enfeebled">Enfeebled</option>
+                    <option value="fascinated">Fascinated</option>
+                    <option value="fatigued">Fatigued</option>
+                    <option value="flatfooted">Flat-Footed</option>
+                    <option value="fleeing">Fleeing</option>
+                    <option value="frightened">Frightened</option>
+                    <option value="grabbed">Grabbed</option>
+                    <option value="hidden">Hidden</option>
+                    <option value="immobilized">Immobilized</option>
+                    <option value="invisible">Invisible</option>
+                    <option value="paralyzed">Paralyzed</option>
+                    <option value="persdamage">Pers. Damage</option>
+                    <option value="petrified">Petrified</option>
+                    <option value="prone">Prone</option>
+                    <option value="quickened">Quickened</option>
+                    <option value="restrained">Restrained</option>
+                    <option value="sickened">Sickened</option>
+                    <option value="slowed">Slowed</option>
+                    <option value="stunned">Stunned</option>
+                    <option value="stupified">Stupified</option>
+                    <option value="unconscious">Unconscious</option>
+                    <option value="undetected">Undetected</option>
+                    <option value="wounded">Wounded</option>
+                </select>
+                <!-- <input list="conditions-list" name="conditions" id="conditions-input">
+                <datalist id="conditions">
+                    <option value="blinded">Blinded</option>
+                </datalist> -->
+                <button id="condition-submit" style="cursor: pointer;">Add</button>
+            </div>
+
+            <div class="content-row">
+                <template id="skill-template">
+                <div class="content-row">
+                    <label class="field-title" id="conditions-template-title" data-label="condition-template-label" style="width: auto">Condition Title</label>
+                    <input id="condition-template-num" type="number" disabled = "disabled" class="field-data-short-mod">
+                    <p id="condition-template-desc" class="condition-desc">Condition description</p>
+                </div>
+                </template>
             </div>
 
 
