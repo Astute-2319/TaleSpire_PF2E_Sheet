@@ -85,7 +85,7 @@ function onInputChange(input) {
         console.error("Failed to load data from local storage:", getBlobResponse);
     });
 
-    TS.debug.log("Input ID: "+input.id)
+    // TS.debug.log("Input ID: "+input.id)
 
     if (input.id == "abilities-text") {
         let actions = parseActions(input.value);
@@ -313,7 +313,7 @@ function addSkillLore(results) {
         oldSkillNew.remove();
     }
 
-    //add new skills    
+    //add new skills
     let templateNew = document.getElementById("skill-template");
    
     let containerNew = templateNew.parentElement;
@@ -382,6 +382,67 @@ function addSkillLore(results) {
         // TS.debug.log("Bonus: "+skillBon);
         document.getElementById(newInput2.id).value = BONCALC (skillMod, skillBon, skillTrain, level, true);
     }
+}
+
+function addCondition() {
+    // TS.debug.log("Adding Condition")
+    var condition = document.getElementById("conditions").value
+    // TS.debug.log(condition)
+    var conditionExists = document.getElementById("condition-"+condition);
+
+    // If the condition already exists, do nothing
+    if (conditionExists) {
+        return
+    }
+    else {
+        let templateNew = document.getElementById("condition-template");
+        let containerNew = templateNew.parentElement;
+
+        let newCondition = templateNew.content.firstElementChild.cloneNode(true);
+
+        let newLabel = newCondition.querySelector("label")
+        newLabel.id = 'condition-'+condition;
+        newLabel.textContent = condition;
+        newLabel.class = "field-title";
+        newLabel.dataset.label = condition;
+
+        // TS.debug.log('Label ID: '+newLabel.id)
+        // TS.debug.log('Label text: '+newLabel.textContent)
+        // TS.debug.log('Label class: '+newLabel.class)
+        // TS.debug.log('Label label: '+newLabel.dataset.label)
+
+        let newInput = newCondition.querySelector("input");
+        newInput.id = 'condition-num-'+condition;
+
+        // TS.debug.log('Input ID: '+newInput.id)
+
+        let newDesc = newCondition.querySelector("p");
+        newDesc.id = 'condition-desc-'+condition;
+        // newDesc.textContent = conditionDescriptions[condition];
+
+        // TS.debug.log('Desc ID: '+newDesc.id)
+        // TS.debug.log('Desc Content: '+newDesc.textContent)
+
+        let newButton = newCondition.querySelector("button");
+        newButton.id = "clear-condition-"+condition;
+        containerNew.insertBefore(newCondition, document.getElementById("condition-temp").parentElement);
+
+        document.getElementById(newButton.id).onclick=function(){clearCondition(condition)};
+        // newButton.addEventListener("click", clearCondition(condition))
+        TS.debug.log("TEST 3")
+
+        // TS.debug.log("Finished templating")
+
+        
+    }
+}
+
+function clearCondition(condition) {
+    var removeElement = document.getElementById('condition-'+condition).parentNode
+    TS.debug.log("Element Only: "+removeElement.id)
+    TS.debug.log("From Doc: "+document.getElementById(removeElement.id).id)
+    document.getElementById(removeElement.id).remove();
+    TS.debug.log("End Clear")
 }
 
 function populateTHAC0(event) {
