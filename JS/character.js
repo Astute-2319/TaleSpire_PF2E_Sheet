@@ -1,3 +1,7 @@
+// import conditionDescriptions from "./conditions.js";
+
+TS.debug.log(conditionDescriptions)
+
 var clearStorageButton = undefined;
 var level = 0;
 
@@ -375,7 +379,7 @@ function addSkillLore(results) {
         // TS.debug.log("Mod: "+newSelect.dataset.modifier)
 
         var skillMod = newSelect.dataset.modifier
-        TS.debug.log("New Skill Mod: "+skillMod)
+        // TS.debug.log("New Skill Mod: "+skillMod)
         var skillTrain = document.getElementById(newSelect.id).value;
         // TS.debug.log("Training: "+skillTrain);
         var skillBon = document.getElementById(newInput1.id).value;
@@ -385,20 +389,36 @@ function addSkillLore(results) {
 }
 
 function addCondition() {
-    // TS.debug.log("Adding Condition")
     var condition = document.getElementById("conditions").value
-    // TS.debug.log(condition)
     var conditionExists = document.getElementById("condition-"+condition);
 
+    // Conditions that have a number associated
+    var valuedConditions = [
+        'clumsy',
+        'doomed',
+        'drained',
+        'dying',
+        'enfeebled',
+        'frightened',
+        'persdamage',
+        'sickened',
+        'slowed',
+        'stunned',
+        'stupefied',
+        'wounded'
+    ]
+
     // If the condition already exists, do nothing
-    if (conditionExists) {
+    if (conditionExists && condition != 'persdamage') {
         return
     }
+    // Otherwise, add it
     else {
         let templateNew = document.getElementById("condition-template");
         let containerNew = templateNew.parentElement;
 
         let newCondition = templateNew.content.firstElementChild.cloneNode(true);
+        newCondition.id = 'condition-row-'+condition
 
         let newLabel = newCondition.querySelector("label")
         newLabel.id = 'condition-'+condition;
@@ -406,43 +426,53 @@ function addCondition() {
         newLabel.class = "field-title";
         newLabel.dataset.label = condition;
 
-        // TS.debug.log('Label ID: '+newLabel.id)
-        // TS.debug.log('Label text: '+newLabel.textContent)
-        // TS.debug.log('Label class: '+newLabel.class)
-        // TS.debug.log('Label label: '+newLabel.dataset.label)
+        if (valuedConditions.includes(condition)) {
+            // TS.debug.log('Valued')
+            let newInput = newCondition.querySelector("input");
+            newInput.id = 'condition-num-'+condition;
+        }
+        else {
+            // TS.debug.log('Not Valued')
+            // TS.debug.log(newCondition.querySelector('input').id)
+            newCondition.querySelector('input').remove()
+        }
 
-        let newInput = newCondition.querySelector("input");
-        newInput.id = 'condition-num-'+condition;
+        // If persistent damage, add a drop down for the type
+        if (condition == 'persdamage') {
+            for (i = 0; i < 3; i++) {
+                // TS.debug.log("LOOP "+i)
+                var newSelectID = "condition-persdamage-select"+i
+                // TS.debug.log(newSelectID)
+                // TS.debug.log(!(document.getElementById(newSelectID)))
+                if (!(document.getElementById(newSelectID))) {
+                    break
+                }
+            }
 
-        // TS.debug.log('Input ID: '+newInput.id)
+            let newSelect = newCondition.querySelector("select");
+            newSelect.id = newSelectID;
+        }
+        else {
+            newCondition.querySelector('select').remove()
+        }
 
+        TS.debug.log("Description")
         let newDesc = newCondition.querySelector("p");
         newDesc.id = 'condition-desc-'+condition;
-        // newDesc.textContent = conditionDescriptions[condition];
-
-        // TS.debug.log('Desc ID: '+newDesc.id)
-        // TS.debug.log('Desc Content: '+newDesc.textContent)
+        newDesc.textContent = conditionDescriptions[condition];
 
         let newButton = newCondition.querySelector("button");
         newButton.id = "clear-condition-"+condition;
         containerNew.insertBefore(newCondition, document.getElementById("condition-temp").parentElement);
 
+        // add this after the container is created so the button exists
         document.getElementById(newButton.id).onclick=function(){clearCondition(condition)};
-        // newButton.addEventListener("click", clearCondition(condition))
-        TS.debug.log("TEST 3")
-
-        // TS.debug.log("Finished templating")
-
-        
     }
 }
 
 function clearCondition(condition) {
-    var removeElement = document.getElementById('condition-'+condition).parentNode
-    TS.debug.log("Element Only: "+removeElement.id)
-    TS.debug.log("From Doc: "+document.getElementById(removeElement.id).id)
+    var removeElement = document.getElementById('condition-row-'+condition)
     document.getElementById(removeElement.id).remove();
-    TS.debug.log("End Clear")
 }
 
 function populateTHAC0(event) {
