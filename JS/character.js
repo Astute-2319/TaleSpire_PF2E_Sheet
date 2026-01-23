@@ -1,7 +1,3 @@
-// import conditionDescriptions from "./conditions.js";
-
-TS.debug.log(conditionDescriptions)
-
 var clearStorageButton = undefined;
 var level = 0;
 
@@ -333,57 +329,25 @@ function addSkillLore(results) {
         newLabel.dataset.modifier = results[i]["title"]+"Tot"
         newLabel.dataset.label = results[i]["title"];
 
-        // TS.debug.log(newLabel.class) // field-title
-        // TS.debug.log(newLabel.id) // Id (Title)
-        // TS.debug.log(newLabel.dataset.prof) // Prof status (true)
-        // TS.debug.log(newLabel.dataset.diceType) // 1d20
-        // TS.debug.log(newLabel.dataset.modifier) // Title+Tot
-        // TS.debug.log(newLabel.dataset.label) // Title
-        // TS.debug.log(newLabel.textContent + '\n') // Title
-        
-
         let newInput1 = newSkill.querySelector("input");
         newInput1.id = results[i]["title"]+"Bon";
 
-        // TS.debug.log(newInput1.id); // Bonus
-        // TS.debug.log(newInput1.type + '\n'); // number
-
-
         let newInput2 = newSkill.querySelectorAll("input")[1];
         newInput2.id = results[i]["title"]+"Tot";
-
-        // TS.debug.log(newInput2.id); // Total
-        // TS.debug.log(newInput2.type + '\n'); //number
-
 
         let newSelect = newSkill.querySelector("select");
         newSelect.id = results[i]["title"]+"-train";
         newSelect.dataset.modifier = "MODIF_"+results[i]["mod"].toUpperCase();
 
-        // TS.debug.log(newSelect.id); //Title- + train
-        // TS.debug.log(newSelect.dataset.modifier + '\n'); // MODIF_mod
-
-
         let newDesc = newSkill.querySelector("p");
         newDesc.id = results[i]["description"];
         newDesc.textContent = results[i]["description"];
 
-        // TS.debug.log("Getting Modifier")
-        // TS.debug.log(document.getElementById(newSelect.dataset.modifier).value)
-
-        // TS.debug.log(newDesc.id); // Desc
-        // TS.debug.log(newDesc.textContent + '\n'); // Desc
-
         containerNew.insertBefore(newSkill, document.getElementById("skills-text").parentElement);
-        
-        // TS.debug.log("Mod: "+newSelect.dataset.modifier)
 
         var skillMod = newSelect.dataset.modifier
-        // TS.debug.log("New Skill Mod: "+skillMod)
         var skillTrain = document.getElementById(newSelect.id).value;
-        // TS.debug.log("Training: "+skillTrain);
         var skillBon = document.getElementById(newInput1.id).value;
-        // TS.debug.log("Bonus: "+skillBon);
         document.getElementById(newInput2.id).value = BONCALC (skillMod, skillBon, skillTrain, level, true);
     }
 }
@@ -427,23 +391,17 @@ function addCondition() {
         newLabel.dataset.label = condition;
 
         if (valuedConditions.includes(condition)) {
-            // TS.debug.log('Valued')
             let newInput = newCondition.querySelector("input");
             newInput.id = 'condition-num-'+condition;
         }
         else {
-            // TS.debug.log('Not Valued')
-            // TS.debug.log(newCondition.querySelector('input').id)
             newCondition.querySelector('input').remove()
         }
 
         // If persistent damage, add a drop down for the type
         if (condition == 'persdamage') {
             for (i = 0; i < 3; i++) {
-                // TS.debug.log("LOOP "+i)
                 var newSelectID = "condition-persdamage-select"+i
-                // TS.debug.log(newSelectID)
-                // TS.debug.log(!(document.getElementById(newSelectID)))
                 if (!(document.getElementById(newSelectID))) {
                     break
                 }
@@ -633,7 +591,6 @@ function ProfBonus(training, level) {
 }
 
 function addToInitiative() {
-    // TS.debug.log("Initative rolled!");
     input = document.getElementById("init-train")
     let finalInput = input;
     let titleSibling = findFirstSiblingWithClass(input, "field-title");
@@ -653,13 +610,11 @@ function calculateRolls(){
     var baseCon = document.getElementById('baseCon').value ;
     var baseCha = document.getElementById('baseCha').value ;
 
-    // TS.debug.log(baseStr);
 
     // var missileATT = document.getElementById('missile-mod').value ;
     // var spellATT = document.getElementById('spell-mod').value ;
 
     var fortTrain = document.getElementById('fort-train').value;
-    // TS.debug.log(fortTrain);
     var reflTrain = document.getElementById('refl-train').value;
     var willTrain = document.getElementById('will-train').value;
 
@@ -686,8 +641,6 @@ function calculateRolls(){
     var spellTrain = document.getElementById('spell-train').value;
     var simpleTrain = document.getElementById('simple-train').value;
     var martialTrain = document.getElementById('martial-train').value;
-
-    // TS.debug.log(classTrain); // --- 2
     
     var saveFortBon = document.getElementById('save-fortitude-bon').value;
     var saveReflexBon = document.getElementById('save-reflex-bon').value;
@@ -696,8 +649,6 @@ function calculateRolls(){
     var acBon = document.getElementById('acBon').value;
     var classBon = document.getElementById('classBon').value;
     var spellBon = document.getElementById('spellBon').value;
-
-    // TS.debug.log(classBon); /// --- 0
     
     var InitBon = document.getElementById('InitBon').value ;
     var AcrBon = document.getElementById('AcrBon').value;
@@ -741,13 +692,9 @@ function calculateRolls(){
     var MODIF_CON = document.getElementById('MODIF_CON').value;
     var MODIF_CHA = document.getElementById('MODIF_CHA').value;
 
-    // TS.debug.log(MODIF_STR); // --- 1
-
     var class_skills = {'str': MODIF_STR, 'int': MODIF_INT, 'wis': MODIF_WIS, 'dex': MODIF_DEX, 'con': MODIF_CON, 'cha': MODIF_CHA}
     var MODIF_CLASS = class_skills[document.getElementById('class-skill').value]
     var MODIF_SPELL = class_skills[document.getElementById('spell-skill').value]
-
-    // TS.debug.log(MODIF_CLASS); // --- 4
 
     document.getElementById('SaveFortitude').value = BONCALC (MODIF_CON, saveFortBon, fortTrain, level, false);
     document.getElementById('SaveReflex').value = BONCALC (MODIF_DEX, saveReflexBon, reflTrain, level, false);
