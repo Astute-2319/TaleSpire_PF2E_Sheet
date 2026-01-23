@@ -27,6 +27,7 @@ Planned:
 - Button that resets all user-implemented bonus changes to reset modifiers and values without clearing the sheet
 - Conditions and their effects on stats
   - The current idea is to create a dropdown menu of all of the conditions and have the user select and add whatever conditions are needed to the sheet. Conditions will be defined on the backend so the user should only have to select the conditions value and everything will be calculated/adjusted as needed.
+- Auto calculate max HP for a character
 - Fully implement weapon attack rolls and damage
   - I intend to implement this similar to the "Additional Skills and Lores" section, in which the user can enter weapon/attack descriptions and stats and the page will generate a new element with the information provided.
 - Separate page for character spells that users can save spell information to, and automates spell attack rolls as needed.
