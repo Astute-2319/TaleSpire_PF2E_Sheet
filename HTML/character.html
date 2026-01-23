@@ -446,9 +446,9 @@
 
             </div>
             <div class="content-row">
-                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="InitTot" data-label="Initiative">Per</label><input id="InitBon" type="number" class="field-data-short" min="0">
+                <label class="field-title" data-prof=true data-dice-type="1d20" data-modifier="InitTot" data-label="Initiative">Per</label><input id="InitBon" type="number" class="field-data-short"><input id="MODIF_PER" type="number" hidden=true class="field-data-short">
                 <input id="InitTot" type="number" disabled = "disabled" class="field-data-short-mod"><p class="field-desc">Perception</p>
-                <select id="init-train" type="select" data-modifier=MODIF_WIS>
+                <select id="init-train" type="select" data-modifier="MODIF_WIS,MODIF_PER">
                     <option value=0>Untrained</option>
                     <option value=2>Trained</option>
                     <option value=4>Expert</option>
@@ -512,7 +512,7 @@
                     <option value="sickened">Sickened</option>
                     <option value="slowed">Slowed</option>
                     <option value="stunned">Stunned</option>
-                    <option value="stupified">Stupified</option>
+                    <option value="stupefied">Stupefied</option>
                     <option value="unconscious">Unconscious</option>
                     <option value="undetected">Undetected</option>
                     <option value="wounded">Wounded</option>
@@ -537,6 +537,9 @@
             <div class="content-row">
                 <div id="condition-temp" area-labelledby="condition-section"></div>
             </div>
+        </div>
+        <div class="content-row">
+            <input style="height:20px" id="calculateRolls" type="checkbox" class="field-data-mid">Press to Recalculate</input><p class="field-desc"></p>
         </div>
     </div>
     <div class="container">
