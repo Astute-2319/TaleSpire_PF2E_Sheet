@@ -512,10 +512,6 @@
                     <option value="undetected">Undetected</option>
                     <option value="wounded">Wounded</option>
                 </select>
-                <!-- <input list="conditions-list" name="conditions" id="conditions-input">
-                <datalist id="conditions">
-                    <option value="blinded">Blinded</option>
-                </datalist> -->
                 <button id="condition-submit" style="cursor: pointer;" onclick=addCondition()>Add</button>
             </div>
 
@@ -523,7 +519,7 @@
                 <template id="condition-template">
                     <div id="condition-row" class="content-row">
                         <label class="field-title" id="conditions-template-title" data-label="condition-template-label" style="width: auto">Condition Title</label>
-                        <input id="condition-template-num" type="number" class="field-data-short-mod">
+                        <input id="condition-template-num" type="number" class="field-data-short-mod" min=0>
                         <p id="condition-template-desc" class="condition-desc">Condition Desc</p>
                         <button id="clear-condition">Clear</button>
                     </div>
