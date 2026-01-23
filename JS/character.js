@@ -1,6 +1,22 @@
 var clearStorageButton = undefined;
 var level = 0;
 
+// Conditions that have a number associated
+var valuedConditions = [
+    'clumsy',
+    'doomed',
+    'drained',
+    'dying',
+    'enfeebled',
+    'frightened',
+    'persdamage',
+    'sickened',
+    'slowed',
+    'stunned',
+    'stupefied',
+    'wounded'
+]
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -94,11 +110,11 @@ function onInputChange(input) {
 
     if (input.id == "skills-text") {
         let skills = parseSkillsLores(input.value);
-        TS.debug.log("Before adding skills");
+        // TS.debug.log("Before adding skills");
         addSkillLore(skills);
-        TS.debug.log("After adding skills");
+        // TS.debug.log("After adding skills");
         for (skill in skills['title']) {
-            TS.debug.log(skill);
+            // TS.debug.log(skill);
         }
     }
 
@@ -127,21 +143,36 @@ function createDiceRoll(clickElement, inputElement) {
     // If the thing being rolled has a prof modifier (saves, skills, etc.)
     if (clickElement.dataset.modifier != "no-mod" && inputElement != null && clickElement.dataset.prof) {
         // If it is a save or you are proficient in any way, always add level
-        TS.debug.log("CreateDiceRoll input element: "+inputElement.value)
+        // TS.debug.log("CreateDiceRoll input element: "+inputElement.value)
         if (inputElement.dataset.save == true || inputElement.value > 0) {
-            TS.debug.log("ADD LEVEL")
-            TS.debug.log("Training: "+parseInt(inputElement.value))
-            TS.debug.log("Level: "+parseInt(level))
-            TS.debug.log("Mod 1: "+inputElement.dataset.modifier)
-            TS.debug.log("Mod 2: "+document.getElementById(inputElement.dataset.modifier))
-            TS.debug.log("Mod Final: "+document.getElementById(inputElement.dataset.modifier).value)
-            modifierString = "+" + (parseInt(inputElement.value) + parseInt(level) + parseInt(document.getElementById(inputElement.dataset.modifier).value));
-            TS.debug.log("Mod string: "+modifierString);
+            // If more than one modifier
+            if (inputElement.dataset.modifier.includes(',')) {
+                // TS.debug.log('Includes ,')
+                var modifsArray = inputElement.dataset.modifier.split(',')
+                // TS.debug.log(modifsArray)
+                var total = 0
+                for (i in modifsArray) {
+                    // TS.debug.log("ADD LEVEL")
+                    // TS.debug.log("Training: "+parseInt(inputElement.value))
+                    // TS.debug.log("Level: "+parseInt(level))
+                    // TS.debug.log("Mod 1: "+modifsArray[i])
+                    // TS.debug.log("Mod 2: "+document.getElementById(modifsArray[i]))
+                    // TS.debug.log("Mod Final: "+document.getElementById(modifsArray[i]).value)
+                    total += parseInt(document.getElementById(modifsArray[i]).value)
+                }
+                modifierString = "+" + (parseInt(inputElement.value) + parseInt(level) + parseInt(total));
+                // TS.debug.log("Mod string: "+modifierString);
+            }
+
+            else {
+                modifierString = "+" + (parseInt(inputElement.value) + parseInt(level) + parseInt(document.getElementById(inputElement.dataset.modifier).value));
+            }
+
 
         }
         // Otherwise, don't add level
         else {
-            TS.debug.log("NO LEVEL")
+            // TS.debug.log("NO LEVEL")
             modifierString ="+" + (parseInt(inputElement.value) + parseInt(document.getElementById(inputElement.dataset.modifier).value));
         }
         // modifierString = inputElement.value >= 0 ? "+" + (parseInt(inputElement.value) + parseInt(level) + parseInt(document.getElementById(inputElement.dataset.modifier).value)) : inputElement.value;
@@ -356,22 +387,6 @@ function addCondition() {
     var condition = document.getElementById("conditions").value
     var conditionExists = document.getElementById("condition-"+condition);
 
-    // Conditions that have a number associated
-    var valuedConditions = [
-        'clumsy',
-        'doomed',
-        'drained',
-        'dying',
-        'enfeebled',
-        'frightened',
-        'persdamage',
-        'sickened',
-        'slowed',
-        'stunned',
-        'stupefied',
-        'wounded'
-    ]
-
     // If the condition already exists, do nothing
     if (conditionExists && condition != 'persdamage') {
         return
@@ -393,6 +408,7 @@ function addCondition() {
         if (valuedConditions.includes(condition)) {
             let newInput = newCondition.querySelector("input");
             newInput.id = 'condition-num-'+condition;
+            newInput.value = 1
         }
         else {
             newCondition.querySelector('input').remove()
@@ -414,10 +430,12 @@ function addCondition() {
             newCondition.querySelector('select').remove()
         }
 
-        TS.debug.log("Description")
+        // TS.debug.log("Description")
         let newDesc = newCondition.querySelector("p");
         newDesc.id = 'condition-desc-'+condition;
         newDesc.textContent = conditionDescriptions[condition];
+        TS.debug.log(newDesc.id)
+        TS.debug.log(newDesc.textContent)
 
         let newButton = newCondition.querySelector("button");
         newButton.id = "clear-condition-"+condition;
@@ -529,6 +547,13 @@ function CALCULMODIF(TOTCARAC, EXHAUSTION){
     return MODIF
 }
 
+function CALCULCOND(condition, value) {
+    // TS.debug.log(conditionModifiers[condition])
+    // var finalArray = 
+    // TS.debug.log(value)
+    return conditionModifiers[condition].map(x => x * parseInt(value));
+}
+
 function BONCALC(MOD, BON, TRAIN, LEVEL, SKILL){
     // If the bonus being calculated is for a skill, only add a proficiency if TRAIN is non 0
     if (SKILL) {
@@ -557,7 +582,7 @@ function BONCALC(MOD, BON, TRAIN, LEVEL, SKILL){
         }
     }
     
-    return BONUS
+    return parseInt(BONUS)
 }
 
 function EXMOD(EXHAUSTIONMOD){
@@ -619,6 +644,7 @@ function calculateRolls(){
     var willTrain = document.getElementById('will-train').value;
 
     var initTrain = document.getElementById('init-train').value;
+
     var acrTrain = document.getElementById('acr-train').value;
     var arcTrain = document.getElementById('arc-train').value;
     var athTrain = document.getElementById('ath-train').value;
@@ -642,6 +668,7 @@ function calculateRolls(){
     var simpleTrain = document.getElementById('simple-train').value;
     var martialTrain = document.getElementById('martial-train').value;
     
+
     var saveFortBon = document.getElementById('save-fortitude-bon').value;
     var saveReflexBon = document.getElementById('save-reflex-bon').value;
     var saveWillBon = document.getElementById('save-will-bon').value; 
@@ -650,7 +677,7 @@ function calculateRolls(){
     var classBon = document.getElementById('classBon').value;
     var spellBon = document.getElementById('spellBon').value;
     
-    var InitBon = document.getElementById('InitBon').value ;
+    var InitBon = document.getElementById('InitBon').value;
     var AcrBon = document.getElementById('AcrBon').value;
     var ArcBon = document.getElementById('ArcBon').value;
     var AthBon = document.getElementById('AthBon').value;
@@ -678,49 +705,103 @@ function calculateRolls(){
     // document.getElementById('missile-mod-exhaustion').value = ATTEXH(missileATT, exhaustionmod);
     // document.getElementById('spell-mod-exhaustion').value = ATTEXH(spellATT, exhaustionmod);
 
-    document.getElementById('MODIF_STR').value =  CALCULMODIF(baseStr, exhaustionmod);
-    document.getElementById('MODIF_INT').value =  CALCULMODIF(baseInt, exhaustionmod);
-    document.getElementById('MODIF_WIS').value =  CALCULMODIF(baseWis, exhaustionmod);
-    document.getElementById('MODIF_DEX').value =  CALCULMODIF(baseDex, exhaustionmod);
-    document.getElementById('MODIF_CON').value =  CALCULMODIF(baseCon, exhaustionmod);
-    document.getElementById('MODIF_CHA').value =  CALCULMODIF(baseCha, exhaustionmod);
-   
-    var MODIF_STR = document.getElementById('MODIF_STR').value;
-    var MODIF_INT = document.getElementById('MODIF_INT').value;
-    var MODIF_WIS = document.getElementById('MODIF_WIS').value;
-    var MODIF_DEX = document.getElementById('MODIF_DEX').value;
-    var MODIF_CON = document.getElementById('MODIF_CON').value;
-    var MODIF_CHA = document.getElementById('MODIF_CHA').value;
+    document.getElementById('MODIF_STR').value = CALCULMODIF(baseStr, exhaustionmod);
+    document.getElementById('MODIF_INT').value = CALCULMODIF(baseInt, exhaustionmod);
+    document.getElementById('MODIF_WIS').value = CALCULMODIF(baseWis, exhaustionmod);
+    document.getElementById('MODIF_DEX').value = CALCULMODIF(baseDex, exhaustionmod);
+    document.getElementById('MODIF_CON').value = CALCULMODIF(baseCon, exhaustionmod);
+    document.getElementById('MODIF_CHA').value = CALCULMODIF(baseCha, exhaustionmod);
+
+    var MODIF_STR = parseInt(document.getElementById('MODIF_STR').value);
+    var MODIF_INT = parseInt(document.getElementById('MODIF_INT').value);
+    var MODIF_WIS = parseInt(document.getElementById('MODIF_WIS').value);
+    var MODIF_DEX = parseInt(document.getElementById('MODIF_DEX').value);
+    var MODIF_CON = parseInt(document.getElementById('MODIF_CON').value);
+    var MODIF_CHA = parseInt(document.getElementById('MODIF_CHA').value);
+
+    // Getting condition modifiers
+    var keys = Object.keys(conditionModifiers)
+    var allCondMods = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    var tempCondMods = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    for (i in keys){
+        condCheck = document.getElementById('condition-row-'+keys[i])
+        // if condition is present, update mod array
+        // TS.debug.log(condCheck)
+        if (condCheck) {
+            // if the condition has a value
+            if (valuedConditions.includes(keys[i])){
+                tempCondMods = CALCULCOND(keys[i], document.getElementById('condition-num-'+keys[i]).value)
+                allCondMods = tempCondMods.map(function (num, idx) {
+                    return num + allCondMods[idx];
+            });
+            }
+            else {
+                tempCondMods = CALCULCOND(keys[i], 1)
+                allCondMods = tempCondMods.map(function (num, idx) {
+                    return num + allCondMods[idx];
+                });
+            }
+            
+        }
+    }
+
+    MODIF_STR += parseInt(allCondMods[0])
+    MODIF_INT += parseInt(allCondMods[1])
+    MODIF_WIS += parseInt(allCondMods[2])
+    MODIF_DEX += parseInt(allCondMods[3])
+    MODIF_CON += parseInt(allCondMods[4])
+    MODIF_CHA += parseInt(allCondMods[5])
+    var MODIF_PER = parseInt(allCondMods[6])
+    var MODIF_FOR = parseInt(allCondMods[7])
+    var MODIF_RFX = parseInt(allCondMods[8])
+    var MODIF_WIL = parseInt(allCondMods[9])
+    var MODIF_AC = parseInt(allCondMods[10])
+    var MODIF_HP_MAX = parseInt(allCondMods[11])
+    var MODIF_ALL_SKILLS = parseInt(allCondMods[12])
+    var MODIF_ALL_SAVES = parseInt(allCondMods[13])
+    var MODIF_ATTACKS = parseInt(allCondMods[14])
+
+    // TS.debug.log(MODIF_AC)
+
+    document.getElementById('MODIF_STR').value = MODIF_STR;
+    document.getElementById('MODIF_INT').value = MODIF_INT;
+    document.getElementById('MODIF_WIS').value = MODIF_WIS;
+    document.getElementById('MODIF_DEX').value = MODIF_DEX;
+    document.getElementById('MODIF_CON').value = MODIF_CON;
+    document.getElementById('MODIF_CHA').value = MODIF_CHA;
+    document.getElementById('MODIF_PER').value = MODIF_PER;
 
     var class_skills = {'str': MODIF_STR, 'int': MODIF_INT, 'wis': MODIF_WIS, 'dex': MODIF_DEX, 'con': MODIF_CON, 'cha': MODIF_CHA}
     var MODIF_CLASS = class_skills[document.getElementById('class-skill').value]
     var MODIF_SPELL = class_skills[document.getElementById('spell-skill').value]
 
-    document.getElementById('SaveFortitude').value = BONCALC (MODIF_CON, saveFortBon, fortTrain, level, false);
-    document.getElementById('SaveReflex').value = BONCALC (MODIF_DEX, saveReflexBon, reflTrain, level, false);
-    document.getElementById('SaveWill').value = BONCALC (MODIF_WIS, saveWillBon, willTrain, level, false);
+    document.getElementById('SaveFortitude').value = MODIF_FOR + MODIF_ALL_SAVES + BONCALC (MODIF_CON, saveFortBon, fortTrain, level, false);
+    document.getElementById('SaveReflex').value = MODIF_RFX + MODIF_ALL_SAVES + BONCALC (MODIF_DEX, saveReflexBon, reflTrain, level, false);
+    document.getElementById('SaveWill').value = MODIF_WIL + MODIF_ALL_SAVES + BONCALC (MODIF_WIS, saveWillBon, willTrain, level, false);
 
-    document.getElementById('InitTot').value = BONCALC (MODIF_WIS, InitBon, initTrain, level, true); 
+    document.getElementById('InitTot').value = MODIF_PER + BONCALC (MODIF_WIS, InitBon, initTrain, level, true); 
 
-    document.getElementById('AcrTot').value = BONCALC (MODIF_DEX, AcrBon, acrTrain, level, true); 
-    document.getElementById('ArcTot').value = BONCALC (MODIF_INT, ArcBon, arcTrain, level, true); 
-    document.getElementById('AthTot').value = BONCALC (MODIF_STR, AthBon, athTrain, level, true); 
-    document.getElementById('CraTot').value = BONCALC (MODIF_INT, CraBon, craTrain, level, true); 
-    document.getElementById('DecTot').value = BONCALC (MODIF_CHA, DecBon, decTrain, level, true); 
-    document.getElementById('DipTot').value = BONCALC (MODIF_CHA, DipBon, dipTrain, level, true); 
-    document.getElementById('IntimTot').value = BONCALC (MODIF_CHA, IntimBon, intimTrain, level, true); 
-    document.getElementById('MedTot').value = BONCALC (MODIF_WIS, MedBon, medTrain, level, true); 
+    // TS.debug.log(document.getElementById('InitTot').value)
 
-    document.getElementById('NatTot').value = BONCALC (MODIF_WIS, NatBon, natTrain, level, true); 
-    document.getElementById('OccTot').value = BONCALC (MODIF_INT, OccBon, occTrain, level, true); 
-    document.getElementById('PerfTot').value = BONCALC (MODIF_CHA, PerfBon, perfTrain, level, true); 
-    document.getElementById('RelTot').value = BONCALC (MODIF_WIS, RelBon, relTrain, level, true); 
-    document.getElementById('SocTot').value = BONCALC (MODIF_INT, SocBon, socTrain, level, true); 
-    document.getElementById('SteTot').value = BONCALC (MODIF_DEX, SteBon, steTrain, level, true); 
-    document.getElementById('SurTot').value = BONCALC (MODIF_WIS, SurBon, surTrain, level, true); 
-    document.getElementById('ThiTot').value = BONCALC (MODIF_DEX, ThiBon, thiTrain, level, true); 
+    document.getElementById('AcrTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_DEX, AcrBon, acrTrain, level, true); 
+    document.getElementById('ArcTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_INT, ArcBon, arcTrain, level, true); 
+    document.getElementById('AthTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_STR, AthBon, athTrain, level, true); 
+    document.getElementById('CraTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_INT, CraBon, craTrain, level, true); 
+    document.getElementById('DecTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_CHA, DecBon, decTrain, level, true); 
+    document.getElementById('DipTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_CHA, DipBon, dipTrain, level, true); 
+    document.getElementById('IntimTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_CHA, IntimBon, intimTrain, level, true); 
+    document.getElementById('MedTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_WIS, MedBon, medTrain, level, true); 
 
-    document.getElementById('acTot').value = 10 + BONCALC(MODIF_DEX, acBon, acTrain, level, true);
+    document.getElementById('NatTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_WIS, NatBon, natTrain, level, true); 
+    document.getElementById('OccTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_INT, OccBon, occTrain, level, true); 
+    document.getElementById('PerfTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_CHA, PerfBon, perfTrain, level, true); 
+    document.getElementById('RelTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_WIS, RelBon, relTrain, level, true); 
+    document.getElementById('SocTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_INT, SocBon, socTrain, level, true); 
+    document.getElementById('SteTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_DEX, SteBon, steTrain, level, true); 
+    document.getElementById('SurTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_WIS, SurBon, surTrain, level, true); 
+    document.getElementById('ThiTot').value = MODIF_ALL_SKILLS + BONCALC (MODIF_DEX, ThiBon, thiTrain, level, true); 
+
+    document.getElementById('acTot').value = 10 + MODIF_AC + BONCALC(MODIF_DEX, acBon, acTrain, level, true);
     document.getElementById('classTot').value = 10 + BONCALC(MODIF_CLASS, classBon, classTrain, level, true);
     document.getElementById('spellTot').value = 10 + BONCALC(MODIF_SPELL, spellBon, spellTrain, level, true);
 }
