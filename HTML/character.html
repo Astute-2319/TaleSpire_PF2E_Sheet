@@ -3,6 +3,7 @@
 <head>
     <title>Character Sheet</title>
     <link rel="stylesheet" href="../Styles/character.css">
+    <script src="../JS/conditions.js" defer></script>
     <script src="../JS/character.js" defer></script>
 </head>
 
@@ -376,6 +377,9 @@
             <div class="content-row">
                     <label class="field-title-perception">Wounded</label><input id="wounded" type="number" class="field-data-short-mod"><p class="field-desc"></p>
             </div>
+            <!-- <div class="content-row">
+                    <label class="field-title-perception">Doomed</label><input id="doomed" type="number" class="field-data-short-mod"><p class="field-desc"></p>
+            </div> -->
             <h2>Attack Weapons</h2>
 
             <p class="field-desc">Field for Hitdice, enter in format "Weapon_Name 1d12+3"</p>
@@ -512,28 +516,26 @@
                     <option value="undetected">Undetected</option>
                     <option value="wounded">Wounded</option>
                 </select>
-                <!-- <input list="conditions-list" name="conditions" id="conditions-input">
-                <datalist id="conditions">
-                    <option value="blinded">Blinded</option>
-                </datalist> -->
                 <button id="condition-submit" style="cursor: pointer;" onclick=addCondition()>Add</button>
             </div>
-
-            <div id="conditions-container" class="container">
-                <template id="condition-template">
-                    <div id="condition-row" class="content-row">
-                        <label class="field-title" id="conditions-template-title" data-label="condition-template-label" style="width: auto">Condition Title</label>
-                        <input id="condition-template-num" type="number" class="field-data-short-mod">
-                        <p id="condition-template-desc" class="condition-desc">Condition Desc</p>
-                        <button id="clear-condition">Clear</button>
-                    </div>
-                </template>
-                <div class="content-row">
-                    <div id="condition-temp" area-labelledby="condition-section"></div>
+        </div>
+        <div id="conditions-container" class="container">
+            <template id="condition-template">
+                <div id="condition-row" class="content-row">
+                    <label class="field-title" id="conditions-template-title" data-label="condition-template-label" style="width: auto">Condition Title</label>
+                    <input id="condition-template-num" type="number" class="field-data-short-mod" min=0>
+                    <select id="condition-persdamage-select">
+                        <option value="bleed">Bleed</option>
+                        <option value="fire">Fire</option>
+                        <option value="acid">Acid</option>
+                    </select>
+                    <p id="condition-template-desc" class="condition-desc" style="font-size: 15px; width:300px; height:100px; overflow-y: scroll;">Condition Desc</p>
+                    <button id="clear-condition" style="width: auto;">Clear</button>
                 </div>
+            </template>
+            <div class="content-row">
+                <div id="condition-temp" area-labelledby="condition-section"></div>
             </div>
-
-
         </div>
     </div>
     <div class="container">
