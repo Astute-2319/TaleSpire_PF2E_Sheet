@@ -178,10 +178,6 @@ button, input {
     transition: ease-in-out 0.1s;
 }
 
-/* select {
-    
-} */
-
 input:disabled {
     background-color: var(--ts-background-secondary);
     color: var(--ts-color-secondary);
