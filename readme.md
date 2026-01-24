@@ -19,14 +19,13 @@ Currently implemented
 - Users can manually increase values as needed to represent item bonuses, temporary bonuses, etc
 - User can add custom skills/lores, and dice rolls are automated for these
   - Known Bug: Modifier does not show in the generated number field. The dice roll still seems to be calculating correctly. Low priority fix right now since the dice rolling works and the modifier can be viewed that way.
+- Conditions and their effects on stats
 - Exhaustion level can be set to subtract values from stats
   - This is mainly here to serve as an example of how I want to implement conditions later.
 - Free text sections for notes, languages known, inventory, etc.
 
 Planned:
 - Button that resets all user-implemented bonus changes to reset modifiers and values without clearing the sheet
-- Conditions and their effects on stats
-  - The current idea is to create a dropdown menu of all of the conditions and have the user select and add whatever conditions are needed to the sheet. Conditions will be defined on the backend so the user should only have to select the conditions value and everything will be calculated/adjusted as needed.
 - Auto calculate max HP for a character
 - Fully implement weapon attack rolls and damage
   - I intend to implement this similar to the "Additional Skills and Lores" section, in which the user can enter weapon/attack descriptions and stats and the page will generate a new element with the information provided.
