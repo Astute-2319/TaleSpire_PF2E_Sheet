@@ -3,7 +3,7 @@
   "name": "My PF2E Character Sheet",
   "summary": "A symbiote that allows the full implementation of a PF2E character in TaleSpire",
   "entryPoint": "/HTML/character.html",
-  "version": "0.3",
+  "version": "0.4",
   "descriptionFilePath": "/readme.md",
   "license": "MIT",
   "about": {
