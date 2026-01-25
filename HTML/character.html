@@ -381,25 +381,69 @@
             <!-- <div class="content-row">
                     <label class="field-title-perception">Doomed</label><input id="doomed" type="number" class="field-data-short-mod"><p class="field-desc"></p>
             </div> -->
-            <h2>Attack Weapons</h2>
-
-            <p class="field-desc">Field for Hitdice, enter in format "Weapon_Name 1d12+3"</p>
+            
             <div class="container">
-                <template id="Hitdice-template">
-                <div class="content-row">
-                    <label id="Hitdice-template-title" class="Hitdice-title">Action Title</label>
-                    <button id="Hitdice-template-button0" data-dice-types="" data-labels="" ><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 1</button>
-                    <button id="Hitdice-template-button1" data-dice-types="" data-labels="" ><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 2</button>
-                    <button id="Hitdice-template-button2" data-dice-types="" data-labels="" ><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 3</button>
-                    <p id="Hitdice-template-desc" class="Hitdice-desc">Action description</p>
-                </div>
+                <h2>Attack Weapons</h2>
+                <template id="weapon-template">
+                    <div id="weapon-container" class="container">
+                        <div id="weapon-row" class="content-row">
+                            <label id="weapon-template-title" data-label="" data-cat="" data-type="" data-dice-type="" data-damage-mod="">Weapon Title</label>
+                            <button id="weapon-template-button0" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 1</button>
+                            <button id="weapon-template-button1" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 2</button>
+                            <button id="weapon-template-button2" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 3</button>
+                            <button id="weapon-template-button3" data-dice-type="" data-labels=""><i style="margin-right: 0.2em;"></i>Damage</button>
+                            <button id="weapon-template-button4" data-labels="" style="background-color: red; font-size: 12px"><i style="margin-right: 0.2em;"></i>DELETE</button>
+                        </div>
+                        <div id="weap-desc" class="content-row">
+                            <p id="weapon-template-desc" class="field-desc-long">Weapon description</p>
+                        </div>
+                    </div>
                 </template>
                 <div class="content-row">
-                    <textarea id="Hitdice-text" area-labelledby="Hitdice-section"></textarea>
+                    <textarea id="weapons-text" area-labelledby="weapons-section"></textarea>
                 </div>
             </div>
             
+            <!-- <div class="content-row">
+                <div id="weapon-temp" area-labelledby="weapon-section"></div>
+            </div> -->
+            <p class="field-desc-long">Box used for typing in weapons</p>
+            <h2>Add Weapons</h2>
+            <div class="container">
+                <details><summary>Open to add a new weapon</summary>
+                <!-- action="javascript:createWeaponForm()" -->
+                <form id="weapons-form">
+                    Weapon Name: <input id="weapon-name" type="text" style="width: 10em" value="Weapon Name">
+                    Weapon Category: <select id="weapon-cat" type="select">
+                                     <!-- <option value="---">---</option> -->
+                                     <option value="unarmed">Unarmed</option>
+                                     <option value="simple">Simple</option>
+                                     <option value="martial">Martial</option>
+                                 </select>
+                    Melee or Ranged: <select id="weapon-type" type="select">
+                                     <!-- <option value="---">---</option> -->
+                                     <option value="melee">Melee</option>
+                                     <option value="ranged">Ranged</option>
+                                 </select>
+                    Damage Dice: <input id="weapon-dice-number" type="number" class="field-data-short-mod" min="0" value="0">
+                                 <select id="weapon-dice-type" type="select">
+                                     <!-- <option value="---">---</option> -->
+                                     <option value="d4">D4</option>
+                                     <option value="d6">D6</option>
+                                     <option value="d8">D8</option>
+                                     <option value="d10">D10</option>
+                                     <option value="d12">D12</option>
+                                 </select>
+                    To-Hit Mod: <input id="weapon-tohit-mod" type="number" class="field-data-short-mod" value="0">
+                    Description: <textarea id="weapon-desc" type="textarea" style="width:350px">Weapon Desc</textarea>
+                    <button id='weapon-form-submit' type="button" onclick="createWeaponForm()">Submit</button>
+                </form>
+                </details>
+                <br><br>
+            </div>
+            
         </div>
+        
         <div class="container">
             <div class="content-row">
                 <label class="field-title" data-prof=true data-modifier="acTot" data-label="AC">AC</label><input id="acBon" type="number" class="field-data-short" min="0">
@@ -461,6 +505,14 @@
                 <button id="init-roll" style="cursor: pointer;" onclick=addToInitiative()>Roll for Initiative!</button>
             </div>
             <div class="content-row" margin="auto">
+                <label class="field-title-perception" style="text-align: center;">Unarmed<br> Prof.</label>
+                <select id="unarmed-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
                 <label class="field-title-perception" style="text-align: center;">Simple<br> Prof.</label>
                 <select id="simple-train" type="select">
                     <option value=0>Untrained</option>
