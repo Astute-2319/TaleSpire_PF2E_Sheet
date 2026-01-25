@@ -245,11 +245,12 @@ function createWeaponForm() {
     weapNameSave = weapName.replace(/ /g, "_")
     weapDescSave = weapDesc.replace(/ /g, "_");
 
+    let writeWeapon = weapName +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDesc
     let saveWeapon = weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDescSave
-    TS.debug.log(saveWeapon)
-    document.getElementById('weapons-text').value += saveWeapon + '\n';
-    TS.debug.log('weapons-text value: '+document.getElementById('weapons-text').value)
-    TS.debug.log('CreateWeaponForm done');
+    // TS.debug.log(saveWeapon)
+    document.getElementById('weapons-text').value += writeWeapon + '\n';
+    // TS.debug.log('weapons-text value: '+document.getElementById('weapons-text').value)
+    // TS.debug.log('CreateWeaponForm done');
     onInputChange(document.getElementById('weapons-text'));
 }
 
@@ -259,6 +260,7 @@ function createWeapon(weapons){
     // Create new weapon from template
     let templateNew = document.getElementById("weapon-template");
     let containerNew = templateNew.parentElement;
+    let writeWeapon = ''
     let saveText = '';
 
     TS.debug.log(weapons.length)
@@ -275,8 +277,9 @@ function createWeapon(weapons){
         weapNameSave = weapName.replace(/ /g, "_")
         weapDescSave = weapDesc.replace(/ /g, "_");
 
-        saveText += (weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDescSave + '\n')
-        TS.debug.log('Save text: '+saveText)
+        writeWeapon += (weapName +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDesc + '\n')
+        // saveText += (weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDescSave + '\n')
+        // TS.debug.log('Save text: '+saveText)
 
         let newWeapon = templateNew.content.firstElementChild.cloneNode(true);
         newWeapon.id = 'weapon-container-'+ weapName.toLowerCase().replace(' ', '-')
@@ -355,7 +358,7 @@ function createWeapon(weapons){
 
     }
 
-    document.getElementById('weapons-text').textContent = saveText;
+    document.getElementById('weapons-text').textContent = writeWeapon;
 
     // Get info from parameter
     // if (weapon) {
