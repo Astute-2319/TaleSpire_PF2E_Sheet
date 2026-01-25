@@ -20,6 +20,9 @@ Currently implemented
 - User can add custom skills/lores, and dice rolls are automated for these
   - Known Bug: Modifier does not show in the generated number field. The dice roll still seems to be calculating correctly. Low priority fix right now since the dice rolling works and the modifier can be viewed that way.
 - Conditions and their effects on stats
+- User can input weapons into a submission form in the character page and it will add a weapon to the page.
+  - Weapon traits are not included with this submission, as implementing their effects is going to be a large undertaking. Will likely tackle this later in the future.
+  - The current implementation seems a tad buggy at times, but closing and reopening the sheet tends to solve issues. In order to make weapons populate on the sheet, and change needs to be made in the text box provided, such as simply appending a space on the end of a line.
 - Exhaustion level can be set to subtract values from stats
   - This is mainly here to serve as an example of how I want to implement conditions later.
 - Free text sections for notes, languages known, inventory, etc.
@@ -28,7 +31,7 @@ Planned:
 - Button that resets all user-implemented bonus changes to reset modifiers and values without clearing the sheet
 - Auto calculate max HP for a character
 - Fully implement weapon attack rolls and damage
-  - I intend to implement this similar to the "Additional Skills and Lores" section, in which the user can enter weapon/attack descriptions and stats and the page will generate a new element with the information provided.
+  - Namely, weapon traits option and their effects on rolls. That was a beast I did not want to tackle right now.
 - Separate page for character spells that users can save spell information to, and automates spell attack rolls as needed.
 - Rolling for initative adds the player's associated mini to the initative order in the correct position.
   - This feature will be reliant on further development of API calls from BouncyRock. May not happen.
@@ -47,8 +50,6 @@ Dagger 1d6+2 Can be thrown
 ```
 
 and both lines will be parsed from the text field to be displayed separately as well.
-
-Note: I plan to overhaul this section so that to-hit rolls are included, and damage is calculated separately. Goal is three to-hit / attack buttons, a fourth damage button, and a toggle for rolling critical damage.
 
 # How to Use
 
