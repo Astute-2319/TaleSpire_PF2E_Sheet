@@ -228,6 +228,7 @@ function createDiceRoll(clickElement, inputElement) {
 // }
 
 function createWeaponForm() {
+    let weapName, weapCat, weapType, weapDice, weapToHit, weapDesc = ''
     TS.debug.log('Run createWeaponForm')
     // Get info from form on HTML page
     weapName = document.getElementById('weapon-name').value
@@ -256,6 +257,15 @@ function createWeaponForm() {
 
 function createWeapon(weapons){
     TS.debug.log("In createWeapon call")
+
+    // let oldWeaponsNew = document.querySelectorAll("[id^=list-weapons-new]");
+    // for (let oldWeaponsNew of oldWeaponsNew) {
+    //     TS.debug.log('removing weapon')
+    //     oldWeaponsNew.remove();
+    // }
+    // TS.debug.log('After removal')
+
+    let weapName, weapCat, weapType, weapDice, weapToHit, weapDesc = ''
     
     // Create new weapon from template
     let templateNew = document.getElementById("weapon-template");
@@ -279,14 +289,14 @@ function createWeapon(weapons){
 
         writeWeapon += (weapName +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDesc + '\n')
         // saveText += (weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDescSave + '\n')
-        // TS.debug.log('Save text: '+saveText)
+        TS.debug.log('Save text: '+saveText)
 
         let newWeapon = templateNew.content.firstElementChild.cloneNode(true);
         newWeapon.id = 'weapon-container-'+ weapName.toLowerCase().replace(' ', '-')
-        // TS.debug.log('newWeapon ID: '+newWeapon.id)
+        TS.debug.log('newWeapon ID: '+newWeapon.id)
 
         var weaponExists = document.getElementById(newWeapon.id);
-        // TS.debug.log('Weapon Exists: '+weaponExists)
+        TS.debug.log('Weapon Exists: '+weaponExists)
         
     
         let count = 1
@@ -297,13 +307,14 @@ function createWeapon(weapons){
             count += 1;
         }
 
-        // TS.debug.log('Past While Loop')
+        TS.debug.log('Past While Loop')
 
         // TS.debug.log(newWeapon.firstElementChild.id)
         // let newWeaponRow = newWeapon.getElementById('weapon-row')
         let newWeaponRow = newWeapon.firstElementChild
         newWeaponRow.id = 'weapon-row-'+weapName;
-        // TS.debug.log('Past Weapon')
+        TS.debug.log('Past Weapon')
+        TS.debug.log('New Weapon ID: '+newWeaponRow.id)
 
         let newLabel = newWeaponRow.querySelector("label");
         newLabel.id = 'weapon-'+weapName;
@@ -319,7 +330,8 @@ function createWeapon(weapons){
         let attackOne = newWeaponRow.querySelectorAll('button')[0];
         attackOne.id = "weapon-"+weapName+'-attack-1'
         attackOne.dataset.diceType = '1d20'
-        // TS.debug.log('Past Attack1')
+        TS.debug.log('Past Attack1')
+        TS.debug.log('New Weapon Attack 1: '+ attackOne.id)
 
         let attackTwo = newWeaponRow.querySelectorAll('button')[1];
         attackTwo.id = "weapon-"+weapName+'-attack-2'
@@ -345,111 +357,41 @@ function createWeapon(weapons){
         newDesc.textContent = weapDesc;
         // TS.debug.log('Past Desc')
 
-        // TS.debug.log('Before Insert')
+        TS.debug.log('Before Insert')
 
         containerNew.insertBefore(newWeapon, document.getElementById("weapons-text").parentNode);
 
-        document.getElementById(attackOne.id).onclick=function(){weaponAttack(weapName, weapCat, weapType, weapTohit, 0)};
-        document.getElementById(attackTwo.id).onclick=function(){weaponAttack(weapName, weapCat, weapType, weapTohit, -5)};
-        document.getElementById(attackThree.id).onclick=function(){weaponAttack(weapName, weapCat, weapType, weapTohit, -10)};
-        document.getElementById(rollDamage.id).onclick=function(){weaponHit(weapName, weapType, weapDice, 0)};
-        document.getElementById(weaponClear.id).onclick=function(){clearWeapon(weapName)};
+        // TS.debug.log(weapName)
+        // TS.debug.log(weapCat)
+        // TS.debug.log(weapType)
+        // TS.debug.log(weapTohit)
+        // TS.debug.log('Attack 1 ID: '+attackOne.id)
+
+        let weapNameSubmit = weapName
+        let weapCatSubmit = weapCat
+        let weapTypeSubmit = weapType
+        let weapTohitSubmit = weapTohit
+        let weapDiceSubmit = weapDice
+
+        document.getElementById(attackOne.id).onclick=function(){weaponAttack(weapNameSubmit, weapCatSubmit, weapTypeSubmit, weapTohitSubmit, 0)};
+        document.getElementById(attackTwo.id).onclick=function(){weaponAttack(weapNameSubmit, weapCatSubmit, weapTypeSubmit, weapTohitSubmit, -5)};
+        document.getElementById(attackThree.id).onclick=function(){weaponAttack(weapNameSubmit, weapCatSubmit, weapTypeSubmit, weapTohitSubmit, -10)};
+        document.getElementById(rollDamage.id).onclick=function(){weaponHit(weapNameSubmit, weapTypeSubmit, weapDiceSubmit, 0)};
+        document.getElementById(weaponClear.id).onclick=function(){clearWeapon(weapNameSubmit)};
 
 
     }
 
+    TS.debug.log(document.getElementById('weapon-Mace-attack-1').onclick)
+    TS.debug.log(document.getElementById('weapon-Longbow-attack-1').onclick)
+
     document.getElementById('weapons-text').textContent = writeWeapon;
-
-    // Get info from parameter
-    // if (weapon) {
-    //     weapName = weapon['weapName']
-    //     weapCat = weapon['weapCat']
-    //     weapType = weapon['weapType']
-    //     weapDice = weapon['weapDice']
-    //     weapTohit = weapon['weapTohit']
-    //     weapDesc = weapon['weapDesc']
-    // }
-    
-    // TS.debug.log('Create Weapon weapName: '+weapName)
-    // TS.debug.log('Create Weapon weapCat: '+weapCat)
-    // TS.debug.log('Create Weapon weapType: '+weapType)
-    // TS.debug.log('Create Weapon weapDice: '+weapDice)
-    // TS.debug.log('Create Weapon weapTohit: '+weapTohit)
-    // TS.debug.log('Create Weapon weapDesc: '+weapDesc)
-
-    // weapNameSave = weapName.replace(/ /g, "_")
-    // weapDescSave = weapDesc.replace(/ /g, "_");
-
-    // saveWeapon = weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohitMod +' '+ weapDescSave
-
-    // document.getElementById('weapons-text').textContent = document.getElementById('weapons-text').textContent + "\n" + saveWeapon;
-
-    // TS.debug.log('Box contents:')
-    // TS.debug.log(document.getElementById('weapons-text').textContent)
-
-    
-
-    // let newWeapon = templateNew.content.cloneNode(true);
-
-    // var weaponExists = document.getElementById(newWeapon.id);
-
-    // If the weapon already exists, give it a new ID
-    // TS.debug.log('Before while')
-    // let count = 1
-    // while (weaponExists) {
-    //     newWeapon.id = newWeapon.id + count;
-    //     weapName = weapName + count;
-    //     weaponExists = document.getElementById(newWeapon.id);
-    //     count += 1;
-    // }
-
-    // let newWeaponRow = newWeapon.getElementById('weapon-row')
-    // newWeaponRow.id = 'weapon-row-'+weapName;
-
-    // let newLabel = newWeapon.querySelector("label");
-    // newLabel.id = 'weapon-'+weapName;
-    // newLabel.textContent = weapName;
-    // newLabel.class = "field-title";
-    // newLabel.dataset.label = weapName;
-    // newLabel.dataset.cat = weapCat;
-    // newLabel.dataset.type = weapType;
-    // newLabel.dataset.diceType = weapDice;
-    // newLabel.dataset.tohitMod = weapTohitMod;
-
-    // let attackOne = newWeapon.querySelectorAll('button')[0];
-    // attackOne.id = "weapon-"+weapName+'-attack-1'
-    // attackOne.dataset.diceType = '1d20'
-
-    // let attackTwo = newWeapon.querySelectorAll('button')[1];
-    // attackTwo.id = "weapon-"+weapName+'-attack-2'
-    // attackTwo.dataset.diceType = '1d20'
-
-    // let attackThree = newWeapon.querySelectorAll('button')[2];
-    // attackThree.id = "weapon-"+weapName+'-attack-3'
-    // attackThree.dataset.diceType = '1d20'
-
-    // let rollDamage = newWeapon.querySelectorAll('button')[3];
-    // rollDamage.id = "weapon-"+weapName+'-damage'
-    // rollDamage.dataset.diceType = weapDice
-
-    // let weaponClear = newWeapon.querySelectorAll('button')[4];
-    // weaponClear.id = "weapon-"+weapName+'-clear'
-
-    // let newDesc = newWeapon.querySelector('p');
-    // newDesc.id = 'weapon-'+weapName+'-desc';
-    // newDesc.textContent = weapDesc;
-
-    // containerNew.insertBefore(newWeapon, document.getElementById("weapons-text").parentNode);
-
-    // document.getElementById(attackOne.id).onclick=function(){weaponAttack(weapName, weapCat, weapType, weapTohitMod, 0)};
-    // document.getElementById(attackTwo.id).onclick=function(){weaponAttack(weapName, weapCat, weapType, weapTohitMod, -5)};
-    // document.getElementById(attackThree.id).onclick=function(){weaponAttack(weapName, weapCat, weapType, weapTohitMod, -10)};
-    // document.getElementById(rollDamage.id).onclick=function(){weaponHit(weapName, weapType, weapDice, 0)};
-    // document.getElementById(weaponClear.id).onclick=function(){clearWeapon(weapName)};
 }
 
 function weaponAttack(weapName, weapCat, weapType, weapTohitMod, multiAttackMod) {
     let hitMod = 0
+    let rollName = ''
+    let rollFinal = ''
     
     // Get weapon training modifier
     if (weapCat == 'unarmed') {
@@ -480,8 +422,14 @@ function weaponAttack(weapName, weapCat, weapType, weapTohitMod, multiAttackMod)
 
     hitMod += parseInt(weapTohitMod) + parseInt(multiAttackMod)
 
-    let rollFinal = '1d20+'+hitMod
-    // TS.debug.log('Roll final: '+rollFinal)
+    if (parseInt(hitMod) >= 0 ){
+        rollFinal = '1d20+'+hitMod
+    }
+    else {
+        rollFinal = '1d20'+hitMod
+    }
+    
+    TS.debug.log('Roll final: '+rollFinal)
 
     // Attack 1
     if (multiAttackMod == 0) {
@@ -516,7 +464,13 @@ function weaponHit(weapName, weapType, weapDice, other) {
 
     dmgMod += other
 
-    finalRoll = dmgDice + '+' + dmgMod
+    if (parseInt(dmgMod) >= 0) {
+        finalRoll = dmgDice + '+' + dmgMod
+    }
+    else {
+        finalRoll = dmgDice + dmgMod
+    }
+    
 
     let diceDesc = [{name: rollName, roll: finalRoll}]
 
@@ -524,8 +478,10 @@ function weaponHit(weapName, weapType, weapDice, other) {
 }
 
 function clearWeapon(weapon) {
-    var removeElement = document.getElementById('weapon-row-'+weapon)
-    document.getElementById(removeElement.id).remove();
+    var removeElement1 = document.getElementById('weapon-row-'+weapon)
+    var removeElement2 = document.getElementById('weapon-desc-'+weapon)
+    document.getElementById(removeElement1.id).remove();
+    document.getElementById(removeElement2.id).remove();
 }
 
 function parseSkillsLores(text) {
