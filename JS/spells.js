@@ -60,7 +60,6 @@ function onInputChange(input) {
     // // TS.debug.log(input.id)
     // }
     //handles input changes to store them in local storage
-    calculateRolls();
     let data;
     // get already stored data
     // See the folder .localStorage to see data format (it's a JSON file)
@@ -76,7 +75,7 @@ function onInputChange(input) {
         // TS.debug.log(input.id)
         if (input.type == "checkbox") {
             data['spells'][input.id] = input.checked ? "on" : "off";
-        } 
+        }
         // else if (input.type == "textarea") {
         //     data[input.id] = input.textContent;
         // } 
@@ -94,46 +93,11 @@ function onInputChange(input) {
             TS.debug.log("Failed to store change to local storage: " + setBlobResponse.cause);
             console.error("Failed to store change to local storage:", setBlobResponse);
         });
+        calculateRolls(data)
     }).catch((getBlobResponse) => {
         TS.debug.log("Failed to load data from local storage: " + getBlobResponse.cause);
         console.error("Failed to load data from local storage:", getBlobResponse);
     });
-
-    // TS.debug.log("Input ID after blobs: "+input.id)
-    // TS.debug.log(input.id == "weapons-text")
-    // console.debug.log("Input ID: "+input.id)
-
-    // if (input.id == "abilities-text") {
-    //     TS.debug.log('Abilities if statement')
-    //     let actions = parseActions(input.value);
-    //     addActions(actions);
-    // }
-
-    // if (input.id == "skills-text") {
-    //     TS.debug.log('Skills if statement')
-    //     let skills = parseSkillsLores(input.value);
-    //     addSkillLore(skills);
-    //     // for (skill in skills['title']) {
-    //     //     // TS.debug.log(skill);
-    //     // }
-    // }
-
-    // if (input.id == "Hitdice-text") {
-    //     TS.debug.log('Hitdice if statement')
-    //     let actionsNew = parseActions(input.value);
-    //     addActionsNew(actionsNew);
-    // }
-
-    // if (input.id == "weapons-text") {
-    //     TS.debug.log('Weapons if statement')
-    //     TS.debug.log(input.value)
-    //     TS.debug.log(document.getElementById('weapons-text').value)
-    //     let weapons = parseWeapons(input.value)
-    //     createWeapon(weapons)
-    //     // for (weapon in weapons) {
-    //     //     createWeapon(weapons[weapon])
-    //     // }
-    // }
 }
 
 function loadStoredData() {
@@ -182,6 +146,8 @@ async function onStateChangeEvent(msg) {
     }
 }
 
-function calculateRolls(){
+function calculateRolls(data){
+    level = parseInt(data["character"]["level"]);
+    
     return;
 }
