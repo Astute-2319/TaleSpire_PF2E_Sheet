@@ -30,7 +30,6 @@ function initSheet() {
             input.addEventListener("change", function() {
                 onInputChange(input)
             });
-
             let titleSibling = findFirstSiblingWithClass(input, "field-title");
             if (titleSibling != null) {
                 titleSibling.id = `${input.id}-field-title`;
@@ -77,9 +76,9 @@ function onInputChange(input) {
     // TS.debug.log(input.id)
     }
     //handles input changes to store them in local storage
-    calculateRolls();
+    calculateRolls(); 
     let data;
-    // get already stored data
+    // get already stored data 
     // See the folder .localStorage to see data format (it's a JSON file)
     // TODO: Can I make it have multiple "pieces"?
     // Example: [character={...}, spells={...}, ...]
@@ -87,15 +86,17 @@ function onInputChange(input) {
         // TS.debug.log(storedData)
         //parse stored blob as json, but also handle if it's empty by
         //defaulting to an empty json document "{}" if stored data is false
-        data = JSON.parse(storedData || "{}");
+        data = JSON.parse(storedData || "{character={}, spells={}}");
+        // TS.debug.log(data)
+        // TS.debug.log(data['character'])
         if (input.type == "checkbox") {
-            data[input.id] = input.checked ? "on" : "off";
+            data['character'][input.id] = input.checked ? "on" : "off";
         } 
         // else if (input.type == "textarea") {
         //     data[input.id] = input.textContent;
-        // } 
+        // }  
         else {
-            data[input.id] = input.value;
+            data['character'][input.id] = input.value;
         }
         //set new data, handle response
         TS.localStorage.campaign.setBlob(JSON.stringify(data)).then(() => {
@@ -782,13 +783,13 @@ function loadStoredData() {
         //localstorage blobs are just unstructured text.
         //this means we can store whatever we like, but we also need to parse it to use it.
         let data = JSON.parse(storedData || "{}");
-        if (Object.entries(data).length > 0) {
+        if (Object.entries(data['character']).length > 0) {
             clearStorageButton.classList.add("danger");
             clearStorageButton.disabled = false;
             clearStorageButton.textContent = "Clear Character Sheet";
         }
         let keyCount = 0;
-        for (let [key, value] of Object.entries(data)) {
+        for (let [key, value] of Object.entries(data['character'])) {
             keyCount++;
             let element = document.getElementById(key);
             element.value = value;
@@ -840,8 +841,8 @@ function clearSheet() {
                 break;
         }
     }
-}
-
+} 
+ 
 async function onStateChangeEvent(msg) {
     if (msg.kind === "hasInitialized") {
         //the TS Symbiote API has initialized and we can begin the setup. think of this as "init".
