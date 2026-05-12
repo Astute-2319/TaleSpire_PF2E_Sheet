@@ -13,6 +13,113 @@
     </div>
     <br>
     
-    
+    <div class="content-row">
+        <input style="height:20px" id="calculateRolls" type="checkbox" class="field-data-mid">Press to Recalculate</input><p class="field-desc"></p>
+    </div>
+
+    <div class="container">
+        <div class="content-row">
+            <label class="field-title" style="width: 4em;">Spell Attack Roll</label>
+            <input id="spell-attack-roll" type="number" class="field-data-short">
+            <br>
+            <label class="field-title">Spell DC</label>
+            <input id="spell-dc" type="number" class="field-data-short">
+        </div>
+        <div class="content-row">
+            <label class="field-title" style="width: 5.5em;">Magic Traditions</label>
+            <div style="float:left;display:flex;flex-direction:column;align-items: center;">
+                <label for="arcane-train">Arcane</label>
+                <select id="arcane-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+            
+            <div style="float:left;display:flex;flex-direction:column;align-items: center;">
+                <label for="primal-train">Primal</label>
+                <select id="primal-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+            
+            <div style="float:left;display:flex;flex-direction:column;align-items: center;">
+                <label for="occult-train">Occult</label>
+                <select id="occult-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+            
+            <div style="float:left;display:flex;flex-direction:column;align-items: center;">
+                <label for="divine-train">Divine</label>
+                <select id="divine-train" type="select">
+                    <option value=0>Untrained</option>
+                    <option value=2>Trained</option>
+                    <option value=4>Expert</option>
+                    <option value=6>Master</option>
+                    <option value=8>Legendary</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="spell-slots">
+        <h2>Spell Slots Per Day</h2>
+        <div class="content-row">
+            <label class="field-title" style="width: 5.5em;">Cantrips</label>
+            <input id="cantrip-level" type="number" class="field-data-short"><p class="field-desc">Cantrip Level</p>
+        </div>
+        <div class="content-row">
+            <label class="field-title">1st Level</label>
+            <input id="first-level-curr" type="number" class="field-data">
+            / <input id="first-level-max" type="number" class="field-data">
+            <label class="field-title">6th Level</label>
+            <input id="sixth-level-curr" type="number" class="field-data">
+            / <input id="sixth-level-max" type="number" class="field-data">
+        </div>
+        <div class="content-row">
+            <label class="field-title">2nd Level</label>
+            <input id="second-level-curr" type="number" class="field-data">
+            / <input id="second-level-max" type="number" class="field-data">
+            <label class="field-title">7th Level</label>
+            <input id="seventh-level-curr" type="number" class="field-data">
+            / <input id="seventh-level-max" type="number" class="field-data">
+        </div>
+        <div class="content-row">
+            <label class="field-title">3rd Level</label>
+            <input id="third-level-curr" type="number" class="field-data">
+            / <input id="third-level-max" type="number" class="field-data">
+            <label class="field-title">8th Level</label>
+            <input id="eighth-level-curr" type="number" class="field-data">
+            / <input id="eighth-level-max" type="number" class="field-data">
+        </div>
+        <div class="content-row">
+            <label class="field-title">4th Level</label>
+            <input id="fourth-level-curr" type="number" class="field-data">
+            / <input id="fourth-level-max" type="number" class="field-data">
+            <label class="field-title">9th Level</label>
+            <input id="ninth-level-curr" type="number" class="field-data">
+            / <input id="ninth-level-max" type="number" class="field-data">
+        </div>
+        <div class="content-row">
+            <label class="field-title">5th Level</label>
+            <input id="fifth-level-curr" type="number" class="field-data">
+            / <input id="fifth-level-max" type="number" class="field-data">
+            <label class="field-title">10th Level</label>
+            <input id="tenth-level-curr" type="number" class="field-data">
+            / <input id="tenth-level-max" type="number" class="field-data">
+        </div>
+
+    </div>
 </body>
 </html>
