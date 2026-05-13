@@ -3,6 +3,21 @@ function sleep(ms) {
 }
 
 function initSheet() {
+    // Run a roll calculation on page open
+    TS.localStorage.campaign.getBlob().then((storedData) => {
+        // TS.debug.log(storedData)
+        //parse stored blob as json, but also handle if it's empty by
+        if (!storedData){
+            data = JSON.parse('{"character":{}, "spells":{}}');
+        }
+        else{
+            data = JSON.parse(storedData)
+        }
+        calculateRolls(data);
+    }).catch((getBlobResponse) => {
+        TS.debug.log("Failed to load data from local storage: " + getBlobResponse.cause);
+        console.error("Failed to load data from local storage:", getBlobResponse);
+    });
     let inputs = document.querySelectorAll("input,button,textarea,select");
     for (let input of inputs) {
         if (input.id != undefined && input.id != "clear-storage") {
@@ -54,11 +69,6 @@ function initSheet() {
 function onInputChange(input) {
     TS.debug.log("Input Change Start: " + input.id)
     // console.log(input.id)
-    // if (input.id == 'weapons-text') {
-    //     TS.debug.log("Input type: "+input.type)
-    //     TS.debug.log("value: "+document.getElementById('weapons-text').value)
-    // // TS.debug.log(input.id)
-    // }
     //handles input changes to store them in local storage
     let data;
     // get already stored data
