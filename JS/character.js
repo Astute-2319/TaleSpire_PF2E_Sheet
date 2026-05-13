@@ -30,10 +30,6 @@ function initSheet() {
             input.addEventListener("change", function() {
                 onInputChange(input)
             });
-<<<<<<< HEAD
-
-=======
->>>>>>> b49d7a0 (recreated spells branch)
             let titleSibling = findFirstSiblingWithClass(input, "field-title");
             if (titleSibling != null) {
                 titleSibling.id = `${input.id}-field-title`;
@@ -81,11 +77,7 @@ function onInputChange(input) {
     }
     //handles input changes to store them in local storage
     let data;
-<<<<<<< HEAD
     // get already stored data
-=======
-    // get already stored data 
->>>>>>> b49d7a0 (recreated spells branch)
     // See the folder .localStorage to see data format (it's a JSON file)
     // TODO: Can I make it have multiple "pieces"?
     // Example: [character={...}, spells={...}, ...]
@@ -105,11 +97,7 @@ function onInputChange(input) {
         } 
         // else if (input.type == "textarea") {
         //     data[input.id] = input.textContent;
-<<<<<<< HEAD
         // } 
-=======
-        // }  
->>>>>>> b49d7a0 (recreated spells branch)
         else {
             data['character'][input.id] = input.value;
         }
