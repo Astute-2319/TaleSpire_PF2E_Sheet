@@ -367,6 +367,7 @@ function createWeapon(weapons){
 
         containerNew.insertBefore(newWeapon, document.getElementById("weapons-text").parentNode);
 
+        TS.debug.log('After Insert')
         // TS.debug.log(weapName)
         // TS.debug.log(weapCat)
         // TS.debug.log(weapType)
@@ -484,10 +485,15 @@ function weaponHit(weapName, weapType, weapDice, other) {
 }
 
 function clearWeapon(weapon) {
-    var removeElement1 = document.getElementById('weapon-row-'+weapon)
-    var removeElement2 = document.getElementById('weapon-desc-'+weapon)
-    document.getElementById(removeElement1.id).remove();
-    document.getElementById(removeElement2.id).remove();
+    // TS.debug.log('CLEAR WEAPON')
+    // TS.debug.log(weapon.toLowerCase().replace(' ', '-'))
+    // var removeElement1 = document.getElementById('weapon-row-'+weapon)
+    // var removeElement2 = document.getElementById('weapon-desc-'+weapon)
+    // document.getElementById(removeElement1.id).remove();
+    // document.getElementById(removeElement2.id).remove();
+    var removeElement = document.getElementById('weapon-container-'+weapon.toLowerCase().replace(' ', '-'))
+    TS.debug.log(removeElement)
+    document.getElementById(removeElement.id).remove();
 }
 
 function parseSkillsLores(text) {
