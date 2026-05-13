@@ -80,6 +80,9 @@ function initSheet() {
             }
         }
     }
+    let weapons = parseWeapons(document.getElementById('weapons-text').value)
+    
+    createWeapon(weapons)
 }
 
 function onInputChange(input) {
@@ -162,10 +165,16 @@ function onInputChange(input) {
         TS.debug.log(input.value)
         TS.debug.log(document.getElementById('weapons-text').value)
         let weapons = parseWeapons(input.value)
+        TS.debug.log("WEAPONS: "+weapons)
+        for (weapon of weapons) {
+            try {
+                TS.debug.log(weapon["weapName"])
+                clearWeapon(weapon["weapName"])
+            }
+            catch {}
+        }
+        TS.debug.log("CLEAR SUCCESS")
         createWeapon(weapons)
-        // for (weapon in weapons) {
-        //     createWeapon(weapons[weapon])
-        // }
     }
 }
 
