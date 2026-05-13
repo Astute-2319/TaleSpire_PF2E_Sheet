@@ -69,7 +69,7 @@ function onInputChange(input) {
         // TS.debug.log(storedData)
         //parse stored blob as json, but also handle if it's empty by
         //defaulting to an empty json document "{}" if stored data is false
-        data = JSON.parse(storedData || "{character={}, spells={}}");
+        data = JSON.parse(storedData || '{"character":{}, "spells":{}}');
         // TS.debug.log(data)
         // TS.debug.log(data['spells'])
         // TS.debug.log(input.id)
@@ -104,7 +104,7 @@ function loadStoredData() {
     TS.localStorage.campaign.getBlob().then((storedData) => {
         //localstorage blobs are just unstructured text.
         //this means we can store whatever we like, but we also need to parse it to use it.
-        let data = JSON.parse(storedData || "{character={}, spells={}}");
+        let data = JSON.parse(storedData || '{"character":{}, "spells":{}}');
         if (Object.entries(data['spells']).length > 0) {
             // clearStorageButton.classList.add("danger");
             // clearStorageButton.disabled = false;
