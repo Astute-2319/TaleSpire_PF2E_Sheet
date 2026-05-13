@@ -864,8 +864,13 @@ function clearSheet() {
                 break;
         }
     }
+<<<<<<< HEAD
 }
 
+=======
+} 
+ 
+>>>>>>> b49d7a0450d3d095139af6ad2a14ad21489ea2c0
 async function onStateChangeEvent(msg) {
     if (msg.kind === "hasInitialized") {
         //the TS Symbiote API has initialized and we can begin the setup. think of this as "init".
