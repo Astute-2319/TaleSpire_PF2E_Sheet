@@ -492,7 +492,7 @@ function clearWeapon(weapon) {
     // document.getElementById(removeElement1.id).remove();
     // document.getElementById(removeElement2.id).remove();
     var removeElement = document.getElementById('weapon-container-'+weapon.toLowerCase().replace(' ', '-'))
-    TS.debug.log(removeElement)
+    // TS.debug.log(removeElement)
     document.getElementById(removeElement.id).remove();
 }
 
