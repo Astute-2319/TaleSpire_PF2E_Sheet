@@ -77,7 +77,6 @@ function onInputChange(input) {
     // TS.debug.log(input.id)
     }
     //handles input changes to store them in local storage
-    calculateRolls();
     let data;
     // get already stored data
     // See the folder .localStorage to see data format (it's a JSON file)
@@ -113,6 +112,7 @@ function onInputChange(input) {
             TS.debug.log("Failed to store change to local storage: " + setBlobResponse.cause);
             console.error("Failed to store change to local storage:", setBlobResponse);
         });
+        calculateRolls(data);
     }).catch((getBlobResponse) => {
         TS.debug.log("Failed to load data from local storage: " + getBlobResponse.cause);
         console.error("Failed to load data from local storage:", getBlobResponse);
@@ -944,78 +944,79 @@ function addToInitiative() {
     TS.dice.putDiceInTray([createDiceRoll(titleSibling, finalInput)]);
 }
 
-function calculateRolls(){
+function calculateRolls(data){
    
-    level = parseInt(document.getElementById('level').value) ;
+    // level = parseInt(document.getElementById('level').value) ;
+    level = parseInt(data['character']['level']);
     document.getElementById('Proficiency Bonus').value = LVLPROF(level);
 
-    var baseStr = document.getElementById('baseStr').value ;
-    var baseInt = document.getElementById('baseInt').value ;
-    var baseWis = document.getElementById('baseWis').value ;
-    var baseDex = document.getElementById('baseDex').value ;
-    var baseCon = document.getElementById('baseCon').value ;
-    var baseCha = document.getElementById('baseCha').value ;
+    // var baseStr = document.getElementById('baseStr').value ;
+    var baseStr = parseInt(data['character']['baseStr']);
+    var baseInt = parseInt(data['character']['baseInt']);
+    var baseWis = parseInt(data['character']['baseWis']);
+    var baseDex = parseInt(data['character']['baseDex']);
+    var baseCon = parseInt(data['character']['baseCon']);
+    var baseCha = parseInt(data['character']['baseCha']);
 
 
     // var missileATT = document.getElementById('missile-mod').value ;
     // var spellATT = document.getElementById('spell-mod').value ;
 
-    var fortTrain = document.getElementById('fort-train').value;
-    var reflTrain = document.getElementById('refl-train').value;
-    var willTrain = document.getElementById('will-train').value;
+    var fortTrain = parseInt(data['character']['fort-train']);
+    var reflTrain = parseInt(data['character']['refl-train']);
+    var willTrain = parseInt(data['character']['will-train']);
 
-    var initTrain = document.getElementById('init-train').value;
+    var initTrain = parseInt(data['character']['init-train']);
 
-    var acrTrain = document.getElementById('acr-train').value;
-    var arcTrain = document.getElementById('arc-train').value;
-    var athTrain = document.getElementById('ath-train').value;
-    var craTrain = document.getElementById('cra-train').value;
-    var decTrain = document.getElementById('dec-train').value;
-    var dipTrain = document.getElementById('dip-train').value;
-    var intimTrain = document.getElementById('intim-train').value;
-    var medTrain = document.getElementById('med-train').value;
-    var natTrain = document.getElementById('nat-train').value;
-    var occTrain = document.getElementById('occ-train').value;
-    var perfTrain = document.getElementById('perf-train').value;
-    var relTrain = document.getElementById('rel-train').value;
-    var socTrain = document.getElementById('soc-train').value;
-    var steTrain = document.getElementById('ste-train').value;
-    var surTrain = document.getElementById('sur-train').value;
-    var thiTrain = document.getElementById('thi-train').value;
+    var acrTrain = parseInt(data['character']['acr-train']);
+    var arcTrain = parseInt(data['character']['arc-train']);
+    var athTrain = parseInt(data['character']['ath-train']);
+    var craTrain = parseInt(data['character']['cra-train']);
+    var decTrain = parseInt(data['character']['dec-train']);
+    var dipTrain = parseInt(data['character']['dip-train']);
+    var intimTrain = parseInt(data['character']['intim-train']);
+    var medTrain = parseInt(data['character']['med-train']);
+    var natTrain = parseInt(data['character']['nat-train']);
+    var occTrain = parseInt(data['character']['occ-train']);
+    var perfTrain = parseInt(data['character']['perf-train']);
+    var relTrain = parseInt(data['character']['rel-train']);
+    var socTrain = parseInt(data['character']['soc-train']);
+    var steTrain = parseInt(data['character']['ste-train']);
+    var surTrain = parseInt(data['character']['sur-train']);
+    var thiTrain = parseInt(data['character']['thi-train']);
 
-    var acTrain = document.getElementById('ac-train').value;
-    var classTrain = document.getElementById('class-train').value;
-    var spellTrain = document.getElementById('spell-train').value;
-    var simpleTrain = document.getElementById('simple-train').value;
-    var martialTrain = document.getElementById('martial-train').value;
+    var acTrain = parseInt(data['character']['ac-train']);
+    var classTrain = parseInt(data['character']['class-train']);
+    var spellTrain = parseInt(data['character']['spell-train']);
+    var simpleTrain = parseInt(data['character']['simple-train']);
+    var martialTrain = parseInt(data['character']['martial-train']);
+
+    var saveFortBon = parseInt(data['character']['save-fortitude-bon']);
+    var saveReflexBon = parseInt(data['character']['save-reflex-bon']);
+    var saveWillBon = parseInt(data['character']['save-will-bon']);
+
+    var acBon = parseInt(data['character']['acBon']);
+    var classBon = parseInt(data['character']['classBon']);
+    var spellBon = parseInt(data['character']['spellBon']);
     
+    var InitBon = parseInt(data['character']['InitBon']);
+    var AcrBon = parseInt(data['character']['AcrBon']);
+    var ArcBon = parseInt(data['character']['ArcBon']);
+    var AthBon = parseInt(data['character']['AthBon']);
+    var CraBon = parseInt(data['character']['CraBon']);
+    var DecBon = parseInt(data['character']['DecBon']);
+    var DipBon = parseInt(data['character']['DipBon']);
+    var IntimBon = parseInt(data['character']['IntimBon']);
+    var MedBon = parseInt(data['character']['MedBon']);
 
-    var saveFortBon = document.getElementById('save-fortitude-bon').value;
-    var saveReflexBon = document.getElementById('save-reflex-bon').value;
-    var saveWillBon = document.getElementById('save-will-bon').value; 
-
-    var acBon = document.getElementById('acBon').value;
-    var classBon = document.getElementById('classBon').value;
-    var spellBon = document.getElementById('spellBon').value;
-    
-    var InitBon = document.getElementById('InitBon').value;
-    var AcrBon = document.getElementById('AcrBon').value;
-    var ArcBon = document.getElementById('ArcBon').value;
-    var AthBon = document.getElementById('AthBon').value;
-    var CraBon = document.getElementById('CraBon').value;
-    var DecBon = document.getElementById('DecBon').value;
-    var DipBon = document.getElementById('DipBon').value;
-    var IntimBon = document.getElementById('IntimBon').value;
-    var MedBon = document.getElementById('MedBon').value;
-
-    var NatBon = document.getElementById('NatBon').value;
-    var OccBon = document.getElementById('OccBon').value;
-    var PerfBon = document.getElementById('PerfBon').value;
-    var RelBon = document.getElementById('RelBon').value;
-    var SocBon = document.getElementById('SocBon').value;
-    var SteBon = document.getElementById('SteBon').value;
-    var SurBon = document.getElementById('SurBon').value;
-    var ThiBon = document.getElementById('ThiBon').value;
+    var NatBon = parseInt(data['character']['NatBon']);
+    var OccBon = parseInt(data['character']['OccBon']);
+    var PerfBon = parseInt(data['character']['PerfBon']);
+    var RelBon = parseInt(data['character']['RelBon']);
+    var SocBon = parseInt(data['character']['SocBon']);
+    var SteBon = parseInt(data['character']['SteBon']);
+    var SurBon = parseInt(data['character']['SurBon']);
+    var ThiBon = parseInt(data['character']['ThiBon']);
 
     var exhaustionmod = document.getElementById('exhaustion-mod').value;
 
