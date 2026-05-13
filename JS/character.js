@@ -1018,7 +1018,7 @@ function calculateRolls(data){
     var SurBon = parseInt(data['character']['SurBon']);
     var ThiBon = parseInt(data['character']['ThiBon']);
 
-    var exhaustionmod = document.getElementById('exhaustion-mod').value;
+    var exhaustionmod = parseInt(data['character']['exhaustion-mod']);
 
     // TS.debug.log("Exhaustion: "+exhaustionmod); // --- 0
 
