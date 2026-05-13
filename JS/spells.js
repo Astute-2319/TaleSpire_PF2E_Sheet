@@ -69,11 +69,6 @@ function initSheet() {
 function onInputChange(input) {
     TS.debug.log("Input Change Start: " + input.id)
     // console.log(input.id)
-    // if (input.id == 'weapons-text') {
-    //     TS.debug.log("Input type: "+input.type)
-    //     TS.debug.log("value: "+document.getElementById('weapons-text').value)
-    // // TS.debug.log(input.id)
-    // }
     //handles input changes to store them in local storage
     let data;
     // get already stored data

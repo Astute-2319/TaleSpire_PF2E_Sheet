@@ -86,13 +86,13 @@ function initSheet() {
 }
 
 function onInputChange(input) {
-    TS.debug.log("Input Change Start: " + input.id)
+    // TS.debug.log("Input Change Start: " + input.id)
     // console.log(input.id)
-    if (input.id == 'weapons-text') {
-        TS.debug.log("Input type: "+input.type)
-        TS.debug.log("value: "+document.getElementById('weapons-text').value)
-    // TS.debug.log(input.id)
-    }
+    // if (input.id == 'weapons-text') {
+    //     TS.debug.log("Input type: "+input.type)
+    //     TS.debug.log("value: "+document.getElementById('weapons-text').value)
+    // // TS.debug.log(input.id)
+    // }
     //handles input changes to store them in local storage
     let data;
     // get already stored data
@@ -140,13 +140,13 @@ function onInputChange(input) {
     // console.debug.log("Input ID: "+input.id)
 
     if (input.id == "abilities-text") {
-        TS.debug.log('Abilities if statement')
+        // TS.debug.log('Abilities if statement')
         let actions = parseActions(input.value);
         addActions(actions);
     }
 
     if (input.id == "skills-text") {
-        TS.debug.log('Skills if statement')
+        // TS.debug.log('Skills if statement')
         let skills = parseSkillsLores(input.value);
         addSkillLore(skills);
         // for (skill in skills['title']) {
@@ -155,25 +155,25 @@ function onInputChange(input) {
     }
 
     if (input.id == "Hitdice-text") {
-        TS.debug.log('Hitdice if statement')
+        // TS.debug.log('Hitdice if statement')
         let actionsNew = parseActions(input.value);
         addActionsNew(actionsNew);
     }
 
     if (input.id == "weapons-text") {
-        TS.debug.log('Weapons if statement')
-        TS.debug.log(input.value)
-        TS.debug.log(document.getElementById('weapons-text').value)
+        // TS.debug.log('Weapons if statement')
+        // TS.debug.log(input.value)
+        // TS.debug.log(document.getElementById('weapons-text').value)
         let weapons = parseWeapons(input.value)
-        TS.debug.log("WEAPONS: "+weapons)
+        // TS.debug.log("WEAPONS: "+weapons)
         for (weapon of weapons) {
             try {
-                TS.debug.log(weapon["weapName"])
+                // TS.debug.log(weapon["weapName"])
                 clearWeapon(weapon["weapName"])
             }
             catch {}
         }
-        TS.debug.log("CLEAR SUCCESS")
+        // TS.debug.log("CLEAR SUCCESS")
         createWeapon(weapons)
     }
 }
@@ -258,7 +258,7 @@ function createDiceRoll(clickElement, inputElement) {
 
 function createWeaponForm() {
     let weapName, weapCat, weapType, weapDice, weapToHit, weapDesc = ''
-    TS.debug.log('Run createWeaponForm')
+    // TS.debug.log('Run createWeaponForm')
     // Get info from form on HTML page
     weapName = document.getElementById('weapon-name').value
     weapCat = document.getElementById('weapon-cat').value
@@ -285,7 +285,7 @@ function createWeaponForm() {
 }
 
 function createWeapon(weapons){
-    TS.debug.log("In createWeapon call")
+    // TS.debug.log("In createWeapon call")
 
     // let oldWeaponsNew = document.querySelectorAll("[id^=list-weapons-new]");
     // for (let oldWeaponsNew of oldWeaponsNew) {
@@ -302,7 +302,7 @@ function createWeapon(weapons){
     let writeWeapon = ''
     let saveText = '';
 
-    TS.debug.log(weapons.length)
+    // TS.debug.log(weapons.length)
 
     for (let i = 0; i < weapons.length; i++) {
         // TS.debug.log(weapons[i]['weapName'])
@@ -318,14 +318,14 @@ function createWeapon(weapons){
 
         writeWeapon += (weapName +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDesc + '\n')
         // saveText += (weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDescSave + '\n')
-        TS.debug.log('Save text: '+saveText)
+        // TS.debug.log('Save text: '+saveText)
 
         let newWeapon = templateNew.content.firstElementChild.cloneNode(true);
         newWeapon.id = 'weapon-container-'+ weapName.toLowerCase().replace(' ', '-')
-        TS.debug.log('newWeapon ID: '+newWeapon.id)
+        // TS.debug.log('newWeapon ID: '+newWeapon.id)
 
         var weaponExists = document.getElementById(newWeapon.id);
-        TS.debug.log('Weapon Exists: '+weaponExists)
+        // TS.debug.log('Weapon Exists: '+weaponExists)
         
     
         let count = 1
@@ -336,14 +336,14 @@ function createWeapon(weapons){
             count += 1;
         }
 
-        TS.debug.log('Past While Loop')
+        // TS.debug.log('Past While Loop')
 
         // TS.debug.log(newWeapon.firstElementChild.id)
         // let newWeaponRow = newWeapon.getElementById('weapon-row')
         let newWeaponRow = newWeapon.firstElementChild
         newWeaponRow.id = 'weapon-row-'+weapName;
-        TS.debug.log('Past Weapon')
-        TS.debug.log('New Weapon ID: '+newWeaponRow.id)
+        // TS.debug.log('Past Weapon')
+        // TS.debug.log('New Weapon ID: '+newWeaponRow.id)
 
         let newLabel = newWeaponRow.querySelector("label");
         newLabel.id = 'weapon-'+weapName;
@@ -359,8 +359,8 @@ function createWeapon(weapons){
         let attackOne = newWeaponRow.querySelectorAll('button')[0];
         attackOne.id = "weapon-"+weapName+'-attack-1'
         attackOne.dataset.diceType = '1d20'
-        TS.debug.log('Past Attack1')
-        TS.debug.log('New Weapon Attack 1: '+ attackOne.id)
+        // TS.debug.log('Past Attack1')
+        // TS.debug.log('New Weapon Attack 1: '+ attackOne.id)
 
         let attackTwo = newWeaponRow.querySelectorAll('button')[1];
         attackTwo.id = "weapon-"+weapName+'-attack-2'
@@ -391,11 +391,11 @@ function createWeapon(weapons){
         newDesc.textContent = weapDesc;
         // TS.debug.log('Past Desc')
 
-        TS.debug.log('Before Insert')
+        // TS.debug.log('Before Insert')
 
         containerNew.insertBefore(newWeapon, document.getElementById("weapons-text").parentNode);
 
-        TS.debug.log('After Insert')
+        // TS.debug.log('After Insert')
         // TS.debug.log(weapName)
         // TS.debug.log(weapCat)
         // TS.debug.log(weapType)
@@ -417,9 +417,6 @@ function createWeapon(weapons){
 
 
     }
-
-    TS.debug.log(document.getElementById('weapon-Mace-attack-1').onclick)
-    TS.debug.log(document.getElementById('weapon-Longbow-attack-1').onclick)
 
     document.getElementById('weapons-text').textContent = writeWeapon;
 }
@@ -465,7 +462,7 @@ function weaponAttack(weapName, weapCat, weapType, weapTohitMod, multiAttackMod)
         rollFinal = '1d20'+hitMod
     }
     
-    TS.debug.log('Roll final: '+rollFinal)
+    // TS.debug.log('Roll final: '+rollFinal)
 
     // Attack 1
     if (multiAttackMod == 0) {
@@ -511,7 +508,7 @@ function weaponHit(weapName, weapType, weapDice, crit, other) {
         finalRoll = "2*("+finalRoll+")"
     }
 
-    TS.debug.log("Final Roll: "+finalRoll)
+    // TS.debug.log("Final Roll: "+finalRoll)
     
 
     let diceDesc = [{name: rollName, roll: finalRoll}]
@@ -546,12 +543,12 @@ function parseSkillsLores(text) {
 }
 
 function parseWeapons(text) {
-    TS.debug.log('parseWeapons Text: '+text)
+    // TS.debug.log('parseWeapons Text: '+text)
     let results = text.matchAll(/(.*) (.*) (.*) ((?:\d{0,2}d\d{1,2}[+-]?\d*)+) (\d+) ?(.*)/gi);
     // TS.debug.log('regex results: '+results)
     let weapons = [];
     for (let result of results) {
-        TS.debug.log('Result: '+[result])
+        // TS.debug.log('Result: '+[result])
         tempName = result[1].replace(/_/g, " ")
         tempDesc = result[6].replace(/_/g, " ")
         // TS.debug.log('tempName: '+tempName)
@@ -565,9 +562,9 @@ function parseWeapons(text) {
         }
         weapons.push(weapon);
     }
-    TS.debug.log("parseWeapons return: "+weapons)
-    TS.debug.log("parseWeapons[0]: "+weapons[0])
-    TS.debug.log("parseWeapons[0]['weapName']: "+weapons[0]['weapName'])
+    // TS.debug.log("parseWeapons return: "+weapons)
+    // TS.debug.log("parseWeapons[0]: "+weapons[0])
+    // TS.debug.log("parseWeapons[0]['weapName']: "+weapons[0]['weapName'])
     return weapons;
 }
 
