@@ -354,7 +354,12 @@ function createWeapon(weapons){
         rollDamage.dataset.diceType = weapDice
         // TS.debug.log('Past Damage')
 
-        let weaponClear = newWeaponRow.querySelectorAll('button')[4];
+        let rollDamageCrit = newWeaponRow.querySelectorAll('button')[4];
+        rollDamageCrit.id = "weapon-"+weapName+'-damage-crit'
+        rollDamageCrit.dataset.diceType = weapDice
+        // TS.debug.log('Past Crit Damage')
+
+        let weaponClear = newWeaponRow.querySelectorAll('button')[5];
         weaponClear.id = "weapon-"+weapName+'-clear'
         // TS.debug.log('Past Clear')
 
@@ -383,7 +388,8 @@ function createWeapon(weapons){
         document.getElementById(attackOne.id).onclick=function(){weaponAttack(weapNameSubmit, weapCatSubmit, weapTypeSubmit, weapTohitSubmit, 0)};
         document.getElementById(attackTwo.id).onclick=function(){weaponAttack(weapNameSubmit, weapCatSubmit, weapTypeSubmit, weapTohitSubmit, -5)};
         document.getElementById(attackThree.id).onclick=function(){weaponAttack(weapNameSubmit, weapCatSubmit, weapTypeSubmit, weapTohitSubmit, -10)};
-        document.getElementById(rollDamage.id).onclick=function(){weaponHit(weapNameSubmit, weapTypeSubmit, weapDiceSubmit, 0)};
+        document.getElementById(rollDamage.id).onclick=function(){weaponHit(weapNameSubmit, weapTypeSubmit, weapDiceSubmit, false, 0)};
+        document.getElementById(rollDamageCrit.id).onclick=function(){weaponHit(weapNameSubmit, weapTypeSubmit, weapDiceSubmit, true, 0)};
         document.getElementById(weaponClear.id).onclick=function(){clearWeapon(weapNameSubmit)};
 
 
@@ -457,7 +463,7 @@ function weaponAttack(weapName, weapCat, weapType, weapTohitMod, multiAttackMod)
 
 }
 
-function weaponHit(weapName, weapType, weapDice, other) {
+function weaponHit(weapName, weapType, weapDice, crit, other) {
     let rollName = "Damage with "+weapName;
     let dmgDice = weapDice
     let dmgMod = 0
@@ -477,6 +483,12 @@ function weaponHit(weapName, weapType, weapDice, other) {
     else {
         finalRoll = dmgDice + dmgMod
     }
+
+    if (crit) {
+        finalRoll = "2*("+finalRoll+")"
+    }
+
+    TS.debug.log("Final Roll: "+finalRoll)
     
 
     let diceDesc = [{name: rollName, roll: finalRoll}]

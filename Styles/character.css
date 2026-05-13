@@ -402,3 +402,8 @@ input[type=number]::-webkit-inner-spin-button {
     background-color: #1300bb;
     color: white;
 }
+
+.btn-container {
+  width: 150px;
+  align-items: center;
+}
