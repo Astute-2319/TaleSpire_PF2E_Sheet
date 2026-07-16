@@ -277,7 +277,6 @@ function createSpellForm() {
     // weapNameSave = weapName.replace(/ /g, "_")
     // weapDescSave = weapDesc.replace(/ /g, "_");
 
-    TS.debug.log('Creating writeSpell')
     let writeSpell = spellName+' '+spellBaseLvl+' '+spellSlotLvl+' '+spellTradition+' '+
                      spellSchool+' '+spellRange+' '+spellTargets+' '+spellTargetsType+' '+
                      spellArea+' '+spellAreaUnit+' '+spellDuration+' '+spellFreq+' '+
@@ -285,7 +284,6 @@ function createSpellForm() {
                      spellDamageDieCount+' '+spellDamageDieType+' '+spellAbilityMod+' '+
                      spellDamageMisc+' '+spellDamageType+' '+spellSaveBox+' '+spellSaveType+' '+
                      spellSaveMisc+' '+spellDesc
-    TS.debug.log('writeSpell done')
     // let saveWeapon = weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDescSave
     // TS.debug.log(saveWeapon)
     document.getElementById('spells-text').value += writeSpell + '\n~~~~~\n';
