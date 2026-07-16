@@ -278,7 +278,7 @@ function createWeaponForm() {
     let writeWeapon = weapName +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDesc
     let saveWeapon = weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDescSave
     // TS.debug.log(saveWeapon)
-    document.getElementById('weapons-text').value += writeWeapon + '\n';
+    document.getElementById('weapons-text').value += writeWeapon + '\n~~~~~\n';
     // TS.debug.log('weapons-text value: '+document.getElementById('weapons-text').value)
     // TS.debug.log('CreateWeaponForm done');
     onInputChange(document.getElementById('weapons-text'));
