@@ -21,7 +21,7 @@ function initSheet() {
     
     let inputs = document.querySelectorAll("input,button,textarea,select");
     for (let input of inputs) {
-        TS.debug.log(input.id)
+        // TS.debug.log(input.id)
         if (input.id != undefined && input.id != "clear-storage") {
             input.addEventListener("change", function() {
                 onInputChange(input)
@@ -69,7 +69,7 @@ function initSheet() {
 }
 
 function onInputChange(input) {
-    TS.debug.log("Input Change Start: " + input.id)
+    // TS.debug.log("Input Change Start: " + input.id)
     // console.log(input.id)
     //handles input changes to store them in local storage
     let data;
@@ -221,4 +221,75 @@ function showCheckboxText(checkboxID, checkboxText) {
     } else {
         text.style.display = "none";
     }
+}
+
+function createSpellForm() {
+    let spellName, spellBaseLvl, spellSlotLvl, spellTradition, spellSchool, spellRange, 
+    spellTargets, spellTargetsType, spellArea, spellAreaUnit, spellDuration, spellFreq,
+    spellAttackBox, spellAttackMisc, spellDamageBox, spellDamageDieCount, spellDamageDieType,
+    spellAbilityMod, spellDamageMisc, spellDamageType, spellSaveBox, spellSaveType, 
+    spellSaveMisc, spellDesc = ''
+    // TS.debug.log('Run createWeaponForm')
+    // Get info from form on HTML page
+    spellName = document.getElementById('spell-name').value
+    spellBaseLvl = document.getElementById('spell-base-lvl').value
+    spellSlotLvl = document.getElementById('spell-slot-lvl').value
+    spellTradition = document.getElementById('spell-tra').value
+    spellSchool = document.getElementById('spell-school').value
+    spellRange = document.getElementById('spell-range').value
+    spellTargets = document.getElementById('spell-target').value
+    spellTargetsType = document.getElementById('spell-target-thing').value
+    spellArea = document.getElementById('spell-area').value
+    spellAreaUnit = document.getElementById('spell-area-unit').value
+    spellDuration = document.getElementById('spell-duration').value
+    spellFreq = document.getElementById('spell-frequency').value
+
+    spellAttackBox = document.getElementById('spell-attack-check').value
+
+    if (spellAttackBox == 'on') {
+        spellAttackMisc = document.getElementById('spell-attack-misc').value
+    }
+
+    spellDamageBox = document.getElementById('spell-damage-check').value
+
+    if (spellDamageBox == 'on') {
+        spellDamageDieCount = document.getElementById('spell-dice-number').value
+        spellDamageDieType = document.getElementById('spell-dice-type').value
+        spellAbilityMod = document.getElementById('spell-damage-ability').value
+        spellDamageMisc = document.getElementById('spell-damage-misc').value
+        spellDamageType = document.getElementById('spell-damage-type').value
+    }
+
+    spellSaveBox = document.getElementById('spell-save-check').value
+
+    if (spellSaveBox == 'on') {
+        spellSaveType = document.getElementById('spell-save-type').value
+        spellSaveMisc = document.getElementById('spell-save-misc').value
+    }
+
+    spellDesc = document.getElementById('spell-desc').value
+
+    // if (weapName == '' || weapCat == '---' || weapType == '---'
+    //     || weapDice == '---') {
+    //         return
+    // }
+
+    // weapNameSave = weapName.replace(/ /g, "_")
+    // weapDescSave = weapDesc.replace(/ /g, "_");
+
+    TS.debug.log('Creating writeSpell')
+    let writeSpell = spellName+' '+spellBaseLvl+' '+spellSlotLvl+' '+spellTradition+' '+
+                     spellSchool+' '+spellRange+' '+spellTargets+' '+spellTargetsType+' '+
+                     spellArea+' '+spellAreaUnit+' '+spellDuration+' '+spellFreq+' '+
+                     spellAttackBox+' '+spellAttackMisc+' '+spellDamageBox+' '+
+                     spellDamageDieCount+' '+spellDamageDieType+' '+spellAbilityMod+' '+
+                     spellDamageMisc+' '+spellDamageType+' '+spellSaveBox+' '+spellSaveType+' '+
+                     spellSaveMisc+' '+spellDesc
+    TS.debug.log('writeSpell done')
+    // let saveWeapon = weapNameSave +' '+ weapCat +' '+ weapType +' '+ weapDice +' '+ weapTohit +' '+ weapDescSave
+    // TS.debug.log(saveWeapon)
+    document.getElementById('spells-text').value += writeSpell + '\n~~~~~\n';
+    // TS.debug.log('weapons-text value: '+document.getElementById('weapons-text').value)
+    // TS.debug.log('CreateWeaponForm done');
+    onInputChange(document.getElementById('spells-text'));
 }
