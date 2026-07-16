@@ -188,7 +188,8 @@ function calculateRolls(data){
     document.getElementById('cantrip-level-3').value = Math.ceil(level/2)
     document.getElementById('cantrip-level-4').value = Math.ceil(level/2)
     document.getElementById('cantrip-level-5').value = Math.ceil(level/2)
-    
+    document.getElementById('spell-attack-create').value = CALCULMODIF(spellSkillVal, exhaustionmod) + level + parseInt(data['spells']['spell-attack-prof'])
+    document.getElementById('spell-dc-create').value = 10 + CALCULMODIF(spellSkillVal, exhaustionmod) + level + parseInt(data['spells']['spell-dc-prof'])
     return;
 }
 
@@ -205,5 +206,19 @@ function printSpell(spellDetailsTag) {
     }
     else {
         TS.chat.send(text, "campaign").catch(console.error);
+    }
+}
+
+function showCheckboxText(checkboxID, checkboxText) {
+    // Get the checkbox
+    var checkBox = document.getElementById(checkboxID);
+    // Get the output text
+    var text = document.getElementById(checkboxText);
+
+    // If the checkbox is checked, display the output text
+    if (checkBox.checked == true){
+        text.style.display = "block";
+    } else {
+        text.style.display = "none";
     }
 }
