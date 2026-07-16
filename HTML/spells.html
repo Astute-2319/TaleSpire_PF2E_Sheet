@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <div class="topnav">
+    <div class="topnav" style="position: fixed;">
         <a href="character.html">Character</a>
         <a class="active" href="spells.html">Spells</a>
     </div>
@@ -25,26 +25,23 @@
             <input id="spell-dc" type="number" class="field-data-short-mod" disabled="disabled">
         
             <label class="field-title" style="width: 4em;">Spell Attack Prof</label>
-            <select id="spell-attack-prof" data-save=true type="select">
-                <option value=0>Untrained</option>
-                <option value=2>Trained</option>
-                <option value=4>Expert</option>
-                <option value=6>Master</option>
-                <option value=8>Legendary</option>
+            <select id="spell-attack-prof" class="field-data-short" data-save=true type="select">
+                <option value=0>U</option>
+                <option value=2>T</option>
+                <option value=4>E</option>
+                <option value=6>M</option>
+                <option value=8>L</option>
             </select>
             <label class="field-title">Spell DC Prof</label>
-            <select id="spell-dc-prof" data-save=true type="select">
-                <option value=0>Untrained</option>
-                <option value=2>Trained</option>
-                <option value=4>Expert</option>
-                <option value=6>Master</option>
-                <option value=8>Legendary</option>
+            <select id="spell-dc-prof" class="field-data-short" data-save=true type="select">
+                <option value=0>U</option>
+                <option value=2>T</option>
+                <option value=4>E</option>
+                <option value=6>M</option>
+                <option value=8>L</option>
             </select>
-            <input id="spell-attack-roll" type="number" class="field-data-short">
-            <br>
-            <label class="field-title">Spell DC</label>
-            <input id="spell-dc" type="number" class="field-data-short">
         </div>
+
         <div class="content-row">
             <label class="field-title" style="width: 5.5em;">Magic Traditions</label>
             <div style="float:left;display:flex;flex-direction:column;align-items: center;">
@@ -144,6 +141,142 @@
 
     <div class="container" id="cantrips">
         <h2>Cantrips</h2>
+        <div class="content-row" style="text-align: center; vertical-align: middle;">
+            <h3>Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                Actions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                Level &nbsp;&nbsp;&nbsp;&nbsp;</h3>
+        </div>
+
+        <!-- Cantrip 1 -->
+        <div class="content-row">
+            <button id="cantrip-print-1" onclick="printSpell('cantrip-info-1')">Print to chat</button>
+            <input id="cantrip-name-1" type="textarea" class="field-data-mid">
+            <select id="cantrip-actions-1" type="select" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <input id="cantrip-level-1" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="cantrip-info-1"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+        <!-- Cantrip 2 -->
+        <div class="content-row">
+            <button id="cantrip-print-2" onclick="printSpell('cantrip-info-2')">Print to chat</button>
+            <input id="cantrip-name-2" type="text" class="field-data-mid">
+            <select id="cantrip-actions-2" type="text" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            <input id="cantrip-level-2" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="cantrip-info-2"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+        <!-- Cantrip 3 -->
+        <div class="content-row">
+            <button id="cantrip-print-3" onclick="printSpell('cantrip-info-3')">Print to chat</button>
+            <input id="cantrip-name-3" type="text" class="field-data-mid">
+            <select id="cantrip-actions-3" type="text" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            <input id="cantrip-level-3" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="cantrip-info-3"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+        <!-- Cantrip 4 -->
+        <div class="content-row">
+            <button id="cantrip-print-4" onclick="printSpell('cantrip-info-4')">Print to chat</button>
+            <input id="cantrip-name-4" type="text" class="field-data-mid">
+            <select id="cantrip-actions-4" type="text" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            <input id="cantrip-level-4" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="cantrip-info-4"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+        <!-- Cantrip 5 -->
+        <div class="content-row">
+            <button id="cantrip-print-5" onclick="printSpell('cantrip-info-5')">Print to chat</button>
+            <input id="cantrip-name-5" type="text" class="field-data-mid">
+            <select id="cantrip-actions-5" type="text" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            <input id="cantrip-level-5" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="cantrip-info-5"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
 
     </div>
 

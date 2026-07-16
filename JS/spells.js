@@ -6,7 +6,7 @@ function initSheet() {
     // Run a roll calculation on page open
     TS.localStorage.campaign.getBlob().then((storedData) => {
         // TS.debug.log(storedData)
-        //parse stored blob as json, but also handle if it's empty by
+        //parse stored blob as json, but also handle if it's empty
         if (!storedData){
             data = JSON.parse('{"character":{}, "spells":{}}');
         }
@@ -18,8 +18,10 @@ function initSheet() {
         TS.debug.log("Failed to load data from local storage: " + getBlobResponse.cause);
         console.error("Failed to load data from local storage:", getBlobResponse);
     });
+    
     let inputs = document.querySelectorAll("input,button,textarea,select");
     for (let input of inputs) {
+        TS.debug.log(input.id)
         if (input.id != undefined && input.id != "clear-storage") {
             input.addEventListener("change", function() {
                 onInputChange(input)
@@ -121,7 +123,10 @@ function loadStoredData() {
             // clearStorageButton.textContent = "Clear Character Sheet";
         }
         let keyCount = 0;
+        // NOTE: If while working you add an ID and later change/delete it, 
+        // make sure to remove it from the data file!!!
         for (let [key, value] of Object.entries(data['spells'])) {
+            // TS.debug.log(key)
             keyCount++;
             let element = document.getElementById(key);
             element.value = value;
@@ -178,6 +183,27 @@ function calculateRolls(data){
     document.getElementById('spell-attack-roll').value = CALCULMODIF(spellSkillVal, exhaustionmod) + level + parseInt(data['spells']['spell-attack-prof'])
     document.getElementById('spell-dc').value = 10 + CALCULMODIF(spellSkillVal, exhaustionmod) + level + parseInt(data['spells']['spell-dc-prof'])
     document.getElementById('cantrip-level').value = Math.ceil(level/2)
+    document.getElementById('cantrip-level-1').value = Math.ceil(level/2)
+    document.getElementById('cantrip-level-2').value = Math.ceil(level/2)
+    document.getElementById('cantrip-level-3').value = Math.ceil(level/2)
+    document.getElementById('cantrip-level-4').value = Math.ceil(level/2)
+    document.getElementById('cantrip-level-5').value = Math.ceil(level/2)
     
     return;
+}
+
+function printSpell(spellDetailsTag) {
+    // TS.debug.log("Button Press")
+    // TS.debug.log(data['spells'][spellDetailsTag])
+    // TS.debug.log("End Button Press")
+    let text = data['spells'][spellDetailsTag];
+    if (text.length > 400) {
+        const text_arr = text.match(/(.|[\r\n]){1,400}/g);
+        for (let i = 0; i < text_arr.length; i++) {
+            TS.chat.send(text_arr[i], "campaign").catch(console.error);
+        }
+    }
+    else {
+        TS.chat.send(text, "campaign").catch(console.error);
+    }
 }
