@@ -287,8 +287,9 @@
                 <!-- action="javascript:createWeaponForm()" -->
                 <form id="spells-form">
                     Spell Name: <input id="spell-name" type="text" style="width: 10em" value="Spell Name">
+                    <br>
                     Spell Base Level: <input id="spell-base-lvl" value="1" class="field-data-short-mod" type="number">
-                    
+                    Spell Slot Level: <input id="spell-slot-lvl" value="1" class="field-data-short-mod" type="number">
                     <br>
                     Spell Tradition: <select id="spell-tra" type="select">
                                      <!-- <option value="---">---</option> -->
@@ -316,7 +317,6 @@
                         <option value="creature">Creature(s)</option>
                         <option value="object">Object(s)</option>
                     </select>
-
                     Area: <input id="spell-area" type="number" class="field-data-short" value="Spell Area">
                     <select id="spell-area-unit" type="select">
                         <option value="burst">Burst</option>
@@ -324,7 +324,6 @@
                         <option value="emanation">Emanation</option>
                         <option value="line">Line</option>
                     </select>
-
                     <br>
                     Duration: <input id="spell-duration" type="number" value="0" class="field-data-short" value="Spell Duration"> Minutes
                     Spell Frequency: <select id="spell-frequency" type="select">
@@ -332,7 +331,6 @@
                         <option value="at-will">At Will</option>
                         <option value="x-per-day">X/Day</option>
                     </select>
-
                     <br>
                     Is Attack? <input id="spell-attack-check" type="checkbox" onclick="showCheckboxText('spell-attack-check', 'spell-attack-text')">
                     <p id="spell-attack-text" style="display:none">
