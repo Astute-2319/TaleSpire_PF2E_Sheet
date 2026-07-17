@@ -217,11 +217,13 @@ function calculateRolls(data){
     return;
 }
 
-function printSpell(spellDetailsTag) {
+function printSpell(spellName) {
     // TS.debug.log("Button Press")
-    // TS.debug.log(data['spells'][spellDetailsTag])
+    // TS.debug.log(spellName)
+    // TS.debug.log('spell-'+spellName+'-desc')
+    // TS.debug.log(document.getElementById('spell-'+spellName+'-desc').textContent)
     // TS.debug.log("End Button Press")
-    let text = data['spells'][spellDetailsTag];
+    let text = spellName.toUpperCase() + '\n' + document.getElementById('spell-'+spellName+'-desc').textContent;
     if (text.length > 400) {
         const text_arr = text.match(/(.|[\r\n]){1,400}/g);
         for (let i = 0; i < text_arr.length; i++) {
@@ -509,6 +511,9 @@ function createSpell(spells) {
         newDesc.id = 'spell-'+spellName+'-desc';
         newDesc.textContent = spellDesc;
         // TS.debug.log('Past Desc')
+        TS.debug.log('Desc button time')
+        let spellDescButton = newSpell.querySelectorAll('button')[6];
+        spellDescButton.id = 'spell-'+spellName+'-desc-button'
 
         // TS.debug.log('Before Insert')
 
@@ -520,7 +525,6 @@ function createSpell(spells) {
         let spellDamageDieCountSubmit = spellDamageDieCount
         let spellDamageDieTypeSubmit = spellDamageDieType
         let spellDamageMiscSubmit = spellDamageMisc
-        
 
         document.getElementById(attackOne.id).onclick=function(){spellAttack(spellNameSubmit, spellTradtionSubmit, spellAttackMiscSubmit, 0)};
         document.getElementById(attackTwo.id).onclick=function(){spellAttack(spellNameSubmit, spellTradtionSubmit, spellAttackMiscSubmit, -5)};
@@ -528,6 +532,7 @@ function createSpell(spells) {
         document.getElementById(rollDamage.id).onclick=function(){spellHit(spellNameSubmit, spellTradtionSubmit, spellDamageDieCountSubmit, spellDamageDieTypeSubmit, spellDamageMiscSubmit, false, 0)};
         document.getElementById(rollDamageCrit.id).onclick=function(){spellHit(spellNameSubmit, spellTradtionSubmit, spellDamageDieCountSubmit, spellDamageDieTypeSubmit, spellDamageMiscSubmit, true, 0)};
         document.getElementById(spellClear.id).onclick=function(){clearSpell(spellNameSubmit)};
+        document.getElementById(spellDescButton.id).onclick=function(){printSpell(spellNameSubmit)};
     }
     TS.debug.log('End create spells for loop')
 
