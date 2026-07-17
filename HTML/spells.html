@@ -280,12 +280,37 @@
 
     </div>
 
-    <div class="container" id="spells">
+    <div class="container">
+        <h2>Spells</h2>
+        <template id="spell-template">
+            <div id="spell-container" class="container">
+                <div id="spell-row" class="content-row">
+                    <label id="spell-template-title" data-label="" data-cat="" data-type="" data-dice-type="" data-damage-mod="">Weapon Title</label>
+                    <button id="spell-template-button0" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 1</button>
+                    <button id="spell-template-button1" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 2</button>
+                    <button id="spell-template-button2" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 3</button>
+                    <div class="btn-container">
+                        <button id="spell-template-button3" data-dice-type="" data-labels=""><i style="margin-right: 0.2em;"></i>Damage</button>
+                        <button id="spell-template-button4" data-dice-type="" data-labels=""><i style="margin-right: 0.2em;"></i>Critical!</button>
+                    </div>
+                    <button id="spell-template-button5" data-labels="" style="background-color: red; font-size: 12px"><i style="margin-right: 0.2em;"></i>DELETE</button>
+                </div>
+                <div id="spell-template-desc" class="content-row">
+                    <p id="spell-template-desc" class="field-desc-long">Spell description</p>
+                </div>
+            </div>
+        </template>
         <div class="content-row">
-            Spells Text Area
-            <textarea id="spells-text" area-labelledby="spells-section"></textarea>
+            Spells Text Area<textarea id="spells-text" area-labelledby="spells-section"></textarea>
         </div>
     </div>
+
+    <!-- <div class="container" id="spells">
+        <div class="content-row">
+            Spells Text Area
+            <textarea id="`text" area-labelledby="spells-section"></textarea>
+        </div>
+    </div> -->
 
     <div class="container" id="add-spells">
         <h2>Add Spell</h2>
@@ -370,6 +395,7 @@
                     <br>
                     Saving Throw Needed? <input id="spell-save-check" type="checkbox" onclick="showCheckboxText('spell-save-check', 'spell-save-text')">
                     <p id="spell-save-text" style="display:none">
+                        Basic? <input id="spell-save-basic" type="checkbox">
                         Save Type: <select id="spell-save-type">
                             <option value="fortitude">Fortitude</option>
                             <option value="reflex">Reflex</option>

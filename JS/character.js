@@ -86,12 +86,6 @@ function initSheet() {
 
 function onInputChange(input) {
     // TS.debug.log("Input Change Start: " + input.id)
-    // console.log(input.id)
-    // if (input.id == 'weapons-text') {
-    //     TS.debug.log("Input type: "+input.type)
-    //     TS.debug.log("value: "+document.getElementById('weapons-text').value)
-    // // TS.debug.log(input.id)
-    // }
     //handles input changes to store them in local storage
     let data;
     // get already stored data
@@ -248,12 +242,6 @@ function createDiceRoll(clickElement, inputElement) {
     //and would ideally need error handling on the return value (and can be rate limited)
     return { name: label, roll: roll };
 }
-
-// function manualCheckWeapText() {
-//     let input = document.getElementById('weapons-text')
-//     let weapons = parseWeapons(input.textContent)
-//     createWeapon(weapons)
-// }
 
 function createWeaponForm() {
     let weapName, weapCat, weapType, weapDice, weapToHit, weapDesc = ''
@@ -413,8 +401,6 @@ function createWeapon(weapons){
         document.getElementById(rollDamage.id).onclick=function(){weaponHit(weapNameSubmit, weapTypeSubmit, weapDiceSubmit, false, 0)};
         document.getElementById(rollDamageCrit.id).onclick=function(){weaponHit(weapNameSubmit, weapTypeSubmit, weapDiceSubmit, true, 0)};
         document.getElementById(weaponClear.id).onclick=function(){clearWeapon(weapNameSubmit)};
-
-
     }
 
     document.getElementById('weapons-text').textContent = writeWeapon;
