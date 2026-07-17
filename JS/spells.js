@@ -577,6 +577,8 @@ function spellHit(spellName, spellTradition, spellDamageDieCount, spellDamageDie
     // TS.debug.log(dmgDice)
     let dmgMod = 0
 
+    dmgMod += parseInt(spellDamageMisc)
+
     if (parseInt(dmgMod) >= 0) {
         finalRoll = dmgDice + '+' + dmgMod
     }
