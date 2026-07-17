@@ -66,8 +66,8 @@ function initSheet() {
             }
         }
     }
-    TS.debug.log('Loading spells text')
-    TS.debug.log(document.getElementById('spells-text').value)
+    // TS.debug.log('Loading spells text')
+    // TS.debug.log(document.getElementById('spells-text').value)
     let spells = parseSpells(document.getElementById('spells-text').value)
     
     createSpell(spells)
@@ -218,12 +218,15 @@ function calculateRolls(data){
 }
 
 function printSpell(spellName) {
-    // TS.debug.log("Button Press")
-    // TS.debug.log(spellName)
-    // TS.debug.log('spell-'+spellName+'-desc')
-    // TS.debug.log(document.getElementById('spell-'+spellName+'-desc').textContent)
-    // TS.debug.log("End Button Press")
-    let text = spellName.toUpperCase() + '\n' + document.getElementById('spell-'+spellName+'-desc').textContent;
+    let text = ''
+
+    if (spellName.includes('cantrip')) {
+        text = spellName.toUpperCase() + '\n' + document.getElementById('spell-'+spellName+'-desc').value;
+    }
+    else {
+        text = spellName.toUpperCase() + '\n' + document.getElementById('spell-'+spellName+'-desc').textContent;
+    }
+    
     if (text.length > 400) {
         const text_arr = text.match(/(.|[\r\n]){1,400}/g);
         for (let i = 0; i < text_arr.length; i++) {
@@ -311,8 +314,8 @@ function createSpellForm() {
 
     spellDesc = document.getElementById('spell-desc').value
 
-    TS.debug.log('Create spell form desc')
-    TS.debug.log(spellDesc)
+    // TS.debug.log('Create spell form desc')
+    // TS.debug.log(spellDesc)
 
     // if (weapName == '' || weapCat == '---' || weapType == '---'
     //     || weapDice == '---') {
@@ -340,7 +343,7 @@ function parseSpells(text) {
     let results = text.matchAll(/(.*) (\d+) (\d+) (arcane|divine|primal|occult) (none|abjuration|conjuration|divination|enchantment|evocation|illusion|necromancy|transmutation) (\d+) (\d+) (creature|object) (\d+) (burst|cone|emanation|line) (\d+) (constant|at-will|x-per-day) (\d+|`) (\d+|`) ((?:\d{0,2}d\d{1,2}[+-]?\d*)+|`) (str|dex|con|int|wis|cha|`) (\d+|`) (.*|`) (true|false|') (fortitude|reflex|will|`) (\d+|`) ((.|\n)*?)(\n~~~~~)/gm);
     let spells = [];
     for (let result of results) {
-        TS.debug.log('Result: '+[result])
+        // TS.debug.log('Result: '+[result])
         // tempName = result[1].replace(/_/g, " ")
         // tempDesc = result[6].replace(/_/g, " ")
         // TS.debug.log('tempName: '+tempName)
@@ -379,13 +382,13 @@ function parseSpells(text) {
     // TS.debug.log("parseWeapons return: "+weapons)
     // TS.debug.log("parseWeapons[0]: "+weapons[0])
     // TS.debug.log("parseWeapons[0]['weapName']: "+weapons[0]['weapName'])
-    TS.debug.log(spells)
+    // TS.debug.log(spells)
     return spells;
 }
 
 function createSpell(spells) {
-    TS.debug.log("Attempting createSpell")
-    TS.debug.log(spells)
+    // TS.debug.log("Attempting createSpell")
+    // TS.debug.log(spells)
     let spellName, spellBaseLvl, spellSlotLvl, spellTradition, spellSchool, spellRange, 
     spellTargets, spellTargetsType, spellArea, spellAreaUnit, spellDuration, spellFreq,
     spellAttackMisc, spellDamageDieCount, spellDamageDieType, spellAbilityMod, 
@@ -423,8 +426,8 @@ function createSpell(spells) {
         spellSaveMisc = spells[i]['spellSaveMisc']
         spellDesc = spells[i]['spellDesc']
 
-        TS.debug.log("Spell desc: ")
-        TS.debug.log(spellDesc)
+        // TS.debug.log("Spell desc: ")
+        // TS.debug.log(spellDesc)
 
         // TS.debug.log('Vars saved')
 
@@ -511,7 +514,7 @@ function createSpell(spells) {
         newDesc.id = 'spell-'+spellName+'-desc';
         newDesc.textContent = spellDesc;
         // TS.debug.log('Past Desc')
-        TS.debug.log('Desc button time')
+        // TS.debug.log('Desc button time')
         let spellDescButton = newSpell.querySelectorAll('button')[6];
         spellDescButton.id = 'spell-'+spellName+'-desc-button'
 
@@ -534,7 +537,7 @@ function createSpell(spells) {
         document.getElementById(spellClear.id).onclick=function(){clearSpell(spellNameSubmit)};
         document.getElementById(spellDescButton.id).onclick=function(){printSpell(spellNameSubmit)};
     }
-    TS.debug.log('End create spells for loop')
+    // TS.debug.log('End create spells for loop')
 
     document.getElementById('spells-text').textContent = writeSpell;
 }
