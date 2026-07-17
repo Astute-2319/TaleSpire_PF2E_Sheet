@@ -400,7 +400,7 @@ function createSpell(spells) {
         // TS.debug.log(weapons[i]['weapName'])
         // weapName = weapons[i]['weapName']
         spellName = spells[i]['spellName']
-        spellName = spellName.toLowerCase().replace(' ', '-')
+        spellName = spellName.toLowerCase()
         spellBaseLvl = spells[i]['spellBaseLvl']
         spellSlotLvl = spells[i]['spellSlotLvl']
         spellTradition = spells[i]['spellTradition']
@@ -597,7 +597,9 @@ function spellHit(spellName, spellTradition, spellDamageDieCount, spellDamageDie
 }
 
 function clearSpell(spell) {
-    var removeElement = document.getElementById('spell-container-'+spell.toLowerCase().replace(' ', '-'))
+    TS.debug.log('Attempting spell clear')
+    TS.debug.log(document.getElementById('spell-container-'+spell.toLowerCase()))
+    var removeElement = document.getElementById('spell-container-'+spell.toLowerCase())
     // TS.debug.log(removeElement)
     document.getElementById(removeElement.id).remove();
 }
