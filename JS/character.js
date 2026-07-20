@@ -440,7 +440,7 @@ function weaponAttack(weapName, weapCat, weapType, weapTohitMod, multiAttackMod)
         }
     }
     else {
-        let martialTrain = (document.getElementById('martial-train').value)
+        let martialTrain = parseInt(document.getElementById('martial-train').value)
         if (martialTrain > 0) {
             hitMod += martialTrain + level
         }
