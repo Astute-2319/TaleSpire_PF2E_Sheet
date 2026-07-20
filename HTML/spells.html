@@ -25,22 +25,23 @@
             <input id="spell-dc" type="number" class="field-data-short-mod" disabled="disabled">
         
             <label class="field-title" style="width: 4em;">Spell Attack Prof</label>
-            <select id="spell-attack-prof" data-save=true type="select">
-                <option value=0>Untrained</option>
-                <option value=2>Trained</option>
-                <option value=4>Expert</option>
-                <option value=6>Master</option>
-                <option value=8>Legendary</option>
+            <select id="spell-attack-prof" class="field-data-short" data-save=true type="select">
+                <option value=0>U</option>
+                <option value=2>T</option>
+                <option value=4>E</option>
+                <option value=6>M</option>
+                <option value=8>L</option>
             </select>
             <label class="field-title">Spell DC Prof</label>
-            <select id="spell-dc-prof" data-save=true type="select">
-                <option value=0>Untrained</option>
-                <option value=2>Trained</option>
-                <option value=4>Expert</option>
-                <option value=6>Master</option>
-                <option value=8>Legendary</option>
+            <select id="spell-dc-prof" class="field-data-short" data-save=true type="select">
+                <option value=0>U</option>
+                <option value=2>T</option>
+                <option value=4>E</option>
+                <option value=6>M</option>
+                <option value=8>L</option>
             </select>
         </div>
+
         <div class="content-row">
             <label class="field-title" style="width: 5.5em;">Magic Traditions</label>
             <div style="float:left;display:flex;flex-direction:column;align-items: center;">
@@ -97,45 +98,323 @@
         </div>
         <div class="content-row">
             <label class="field-title">1st Level</label>
-            <input id="first-level-curr" type="number" class="field-data">
-            / <input id="first-level-max" type="number" class="field-data">
+            <input id="first-level-curr" type="number" class="field-data-short-mod">
+            / <input id="first-level-max" type="number" class="field-data-short-mod">
             <label class="field-title">6th Level</label>
-            <input id="sixth-level-curr" type="number" class="field-data">
-            / <input id="sixth-level-max" type="number" class="field-data">
+            <input id="sixth-level-curr" type="number" class="field-data-short-mod">
+            / <input id="sixth-level-max" type="number" class="field-data-short-mod">
         </div>
         <div class="content-row">
             <label class="field-title">2nd Level</label>
-            <input id="second-level-curr" type="number" class="field-data">
-            / <input id="second-level-max" type="number" class="field-data">
+            <input id="second-level-curr" type="number" class="field-data-short-mod">
+            / <input id="second-level-max" type="number" class="field-data-short-mod">
             <label class="field-title">7th Level</label>
-            <input id="seventh-level-curr" type="number" class="field-data">
-            / <input id="seventh-level-max" type="number" class="field-data">
+            <input id="seventh-level-curr" type="number" class="field-data-short-mod">
+            / <input id="seventh-level-max" type="number" class="field-data-short-mod">
         </div>
         <div class="content-row">
             <label class="field-title">3rd Level</label>
-            <input id="third-level-curr" type="number" class="field-data">
-            / <input id="third-level-max" type="number" class="field-data">
+            <input id="third-level-curr" type="number" class="field-data-short-mod">
+            / <input id="third-level-max" type="number" class="field-data-short-mod">
             <label class="field-title">8th Level</label>
-            <input id="eighth-level-curr" type="number" class="field-data">
-            / <input id="eighth-level-max" type="number" class="field-data">
+            <input id="eighth-level-curr" type="number" class="field-data-short-mod">
+            / <input id="eighth-level-max" type="number" class="field-data-short-mod">
         </div>
         <div class="content-row">
             <label class="field-title">4th Level</label>
-            <input id="fourth-level-curr" type="number" class="field-data">
-            / <input id="fourth-level-max" type="number" class="field-data">
+            <input id="fourth-level-curr" type="number" class="field-data-short-mod">
+            / <input id="fourth-level-max" type="number" class="field-data-short-mod">
             <label class="field-title">9th Level</label>
-            <input id="ninth-level-curr" type="number" class="field-data">
-            / <input id="ninth-level-max" type="number" class="field-data">
+            <input id="ninth-level-curr" type="number" class="field-data-short-mod">
+            / <input id="ninth-level-max" type="number" class="field-data-short-mod">
         </div>
         <div class="content-row">
             <label class="field-title">5th Level</label>
-            <input id="fifth-level-curr" type="number" class="field-data">
-            / <input id="fifth-level-max" type="number" class="field-data">
+            <input id="fifth-level-curr" type="number" class="field-data-short-mod">
+            / <input id="fifth-level-max" type="number" class="field-data-short-mod">
             <label class="field-title">10th Level</label>
-            <input id="tenth-level-curr" type="number" class="field-data">
-            / <input id="tenth-level-max" type="number" class="field-data">
+            <input id="tenth-level-curr" type="number" class="field-data-short-mod">
+            / <input id="tenth-level-max" type="number" class="field-data-short-mod">
         </div>
 
     </div>
+
+    <div class="container" id="cantrips">
+        <h2>Cantrips</h2>
+        <div class="content-row" style="text-align: center; vertical-align: middle;">
+            <h3>Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                Actions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                Level &nbsp;&nbsp;&nbsp;&nbsp;</h3>
+        </div>
+
+        <!-- Cantrip 1 -->
+        <div class="content-row">
+            <button id="cantrip-print-1" onclick="printSpell('cantrip-1')">Print to chat</button>
+            <input id="cantrip-name-1" type="textarea" class="field-data-mid">
+            <select id="cantrip-actions-1" type="select" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <input id="cantrip-level-1" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="spell-cantrip-1-desc" maxlength="375"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+        <!-- Cantrip 2 -->
+        <div class="content-row">
+            <button id="cantrip-print-2" onclick="printSpell('cantrip-2')">Print to chat</button>
+            <input id="cantrip-name-2" type="text" class="field-data-mid">
+            <select id="cantrip-actions-2" type="text" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            <input id="cantrip-level-2" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="spell-cantrip-2-desc" maxlength="375"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+        <!-- Cantrip 3 -->
+        <div class="content-row">
+            <button id="cantrip-print-3" onclick="printSpell('cantrip-3')">Print to chat</button>
+            <input id="cantrip-name-3" type="text" class="field-data-mid">
+            <select id="cantrip-actions-3" type="text" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            <input id="cantrip-level-3" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="spell-cantrip-3-desc" maxlength="375"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+        <!-- Cantrip 4 -->
+        <div class="content-row">
+            <button id="cantrip-print-4" onclick="printSpell('cantrip-4')">Print to chat</button>
+            <input id="cantrip-name-4" type="text" class="field-data-mid">
+            <select id="cantrip-actions-4" type="text" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            <input id="cantrip-level-4" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="spell-cantrip-4-desc" maxlength="375"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+        <!-- Cantrip 5 -->
+        <div class="content-row">
+            <button id="cantrip-print-5" onclick="printSpell('cantrip-5')">Print to chat</button>
+            <input id="cantrip-name-5" type="text" class="field-data-mid">
+            <select id="cantrip-actions-5" type="text" class="field-data-mid">
+                <option value="1-action">1-Action</option>
+                <option value="2-action">2-Actions</option>
+                <option value="3-action">3-Actions</option>
+                <option value="1-2-action">1 to 2 Actions</option>
+                <option value="1-3-action">1 to 3 Actions</option>
+                <option value="reaction">Reaction</option>
+                <option value="other">Other</option>
+            </select>
+            <input id="cantrip-level-5" type="number" class="field-data-short-mod" disabled="disabled">
+        </div>
+        <div class="content-row">
+            <details>
+                <textarea id="spell-cantrip-5-desc" maxlength="375"></textarea>
+                <div class="content-row">
+                <details>
+                    <summary class="debug-spell-info">Ugly spell code here</summary>
+                    Don't read me!!!
+                </details>
+            </details>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <h2>Spells</h2>
+        <template id="spell-template">
+            <div id="spell-container" class="container">
+                <div id="spell-row" class="content-row">
+                    <label id="spell-template-title" data-label="" data-cat="" data-type="" data-dice-type="" data-damage-mod="">Weapon Title</label>
+                    <button id="spell-template-button0" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 1</button>
+                    <button id="spell-template-button1" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 2</button>
+                    <button id="spell-template-button2" data-dice-type="" data-labels=""><i class="ts-icon-sword-crossed ts-icon-small" style="margin-right: 0.2em;"></i>Attack 3</button>
+                    <div class="btn-container">
+                        <button id="spell-template-button3" data-dice-type="" data-labels=""><i style="margin-right: 0.2em;"></i>Damage</button>
+                        <button id="spell-template-button4" data-dice-type="" data-labels=""><i style="margin-right: 0.2em;"></i>Critical!</button>
+                    </div>
+                    <button id="spell-template-button5" data-labels="" style="background-color: red; font-size: 12px"><i style="margin-right: 0.2em;"></i>DELETE</button>
+                    <br>
+                </div>
+                <div id="spell-template-desc" class="content-row">
+                    <p id="spell-template-desc" class="field-desc-long">Spell description</p>
+                </div>
+                <button id="spell-template-button6" data-labels=""><i style="margin-right: 0.2em;"></i>Share</button>
+            </div>
+        </template>
+        <div class="content-row">
+            Spells Text Area<textarea id="spells-text" area-labelledby="spells-section"></textarea>
+        </div>
+    </div>
+
+    <!-- <div class="container" id="spells">
+        <div class="content-row">
+            Spells Text Area
+            <textarea id="`text" area-labelledby="spells-section"></textarea>
+        </div>
+    </div> -->
+
+    <div class="container" id="add-spells">
+        <h2>Add Spell</h2>
+            <div class="container">
+                <details><summary>Open to add a new spell</summary>
+                <!-- action="javascript:createWeaponForm()" -->
+                <form id="spells-form">
+                    Spell Name: <input id="spell-name" type="text" style="width: 10em" value="Spell Name">
+                    <br>
+                    Spell Base Level: <input id="spell-base-lvl" value="1" class="field-data-short-mod" type="number">
+                    Spell Slot Level: <input id="spell-slot-lvl" value="1" class="field-data-short-mod" type="number">
+                    <br>
+                    Spell Tradition: <select id="spell-tra" type="select">
+                                     <!-- <option value="---">---</option> -->
+                                     <option value="arcane">Arcane</option>
+                                     <option value="divine">Divine</option>
+                                     <option value="primal">Primal</option>
+                                     <option value="occult">Occult</option>
+                                 </select>
+                    Spell School: <select id="spell-school" type="select">
+                                     <!-- <option value="---">---</option> -->
+                                     <option value="none">None</option>
+                                     <option value="abjuration">Abjuration</option>
+                                     <option value="conjuration">Conjuration</option>
+                                     <option value="divination">Divination</option>
+                                     <option value="enchantment">Enchantment</option>
+                                     <option value="evocation">Evocation</option>
+                                     <option value="illusion">Illusion</option>
+                                     <option value="necromancy">Necromancy</option>
+                                     <option value="transmutation">Transmutation</option>
+                                 </select>
+                    Range: <input id="spell-range" type="number" class="field-data-short" value="Spell Range"> ft
+                    <br>
+                    Target(s): <input id="spell-target" type="number" class="field-data-short" value="Spell Target">
+                    <select id="spell-target-thing" type="select">
+                        <option value="creature">Creature(s)</option>
+                        <option value="object">Object(s)</option>
+                    </select>
+                    Area: <input id="spell-area" type="number" class="field-data-short" value="Spell Area">
+                    <select id="spell-area-unit" type="select">
+                        <option value="burst">Burst</option>
+                        <option value="cone">Cone</option>
+                        <option value="emanation">Emanation</option>
+                        <option value="line">Line</option>
+                    </select>
+                    <br>
+                    Duration: <input id="spell-duration" type="number" value="0" class="field-data-short" value="Spell Duration"> Minutes
+                    Spell Frequency: <select id="spell-frequency" type="select">
+                        <option value="constant">Constant</option>
+                        <option value="at-will">At Will</option>
+                        <option value="x-per-day">X/Day</option>
+                    </select>
+                    <br>
+                    Is Attack? <input id="spell-attack-check" type="checkbox" onclick="showCheckboxText('spell-attack-check', 'spell-attack-text')">
+                    <p id="spell-attack-text" style="display:none">
+                        Spell Attack: <input id="spell-attack-create" type="number" class="field-data-short-mod" disabled="disabled">
+                        Misc Modifier: <input id="spell-attack-misc" type="number" value="0" class="field-data-short-mod">
+                    </p>
+                    <br>
+                    Does Damage? <input id="spell-damage-check" type="checkbox" onclick="showCheckboxText('spell-damage-check', 'spell-damage-text')">
+                    <p id="spell-damage-text" style="display:none">
+                        Damage Dice: <input id="spell-dice-number" type="number" class="field-data-short-mod" min="0" value="0">
+                        <select id="spell-dice-type" type="select">
+                            <!-- <option value="---">---</option> -->
+                            <option value="d4">D4</option>
+                            <option value="d6">D6</option>
+                            <option value="d8">D8</option>
+                            <option value="d10">D10</option>
+                            <option value="d12">D12</option>
+                        </select>
+                        Ability Mod: <select id="spell-damage-ability" type="select">
+                            <option value="str">STR</option>
+                            <option value="dex">DEX</option>
+                            <option value="con">CON</option>
+                            <option value="int">INT</option>
+                            <option value="wis">WIS</option>
+                            <option value="cha">CHA</option>
+                        </select>
+                        Misc Modifier: <input id="spell-damage-misc" type="number" value="0" class="field-data-short-mod">
+                        Damage Type: <input id="spell-damage-type" type="text" value="None" class="field-data-mid">
+                    </p>
+                    <br>
+                    Saving Throw Needed? <input id="spell-save-check" type="checkbox" onclick="showCheckboxText('spell-save-check', 'spell-save-text')">
+                    <p id="spell-save-text" style="display:none">
+                        Basic? <input id="spell-save-basic" type="checkbox">
+                        Save Type: <select id="spell-save-type">
+                            <option value="fortitude">Fortitude</option>
+                            <option value="reflex">Reflex</option>
+                            <option value="will">Will</option>
+                        </select>
+                        Save DC: <input id="spell-dc-create" type="number" class="field-data-short-mod" disabled="disabled">
+                        Misc Modifier: <input id="spell-save-misc" type="number" value="0" class="field-data-short-mod">
+                    </p>
+                    
+                    <br>
+                    Description: <textarea id="spell-desc" type="textarea" maxlength="375" style="width:350px">Spell Desc</textarea>
+                    <button id='spell-form-submit' type="button" onclick="createSpellForm()">Submit</button>
+                </form>
+                </details>
+                <br><br>
+            </div>
+    </div>
+
 </body>
 </html>
